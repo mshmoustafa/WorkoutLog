@@ -7,15 +7,36 @@
 //
 
 #import "AppDelegate.h"
+#import "WorkoutLogStore.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    // Override point for customization after application launch.
+//    self.window.backgroundColor = [UIColor whiteColor];
+//    [self.window makeKeyAndVisible];
+    
+//    TabBarViewController *tabViewController = [[TabBarViewController alloc] init];
+//    
+//    ViewController *v1 = [[ViewController alloc] init];
+//    [v1 setTitle:@"View 1"];
+//    [v1.label setText:@"View 1"];
+//    [v1.view setBackgroundColor:[UIColor blueColor]];
+//    ViewController *v2 = [[ViewController alloc] init];
+//    [v2 setTitle:@"View 2"];
+//    [v2.label setText:@"View 2"];
+//    [v2.view setBackgroundColor:[UIColor greenColor]];
+//    [v1.view setNeedsDisplay];
+//    [v2.view setNeedsDisplay];
+//    
+//    [tabViewController setViewControllers:@[v1,v2]];
+//    
+//    [self.window setRootViewController:tabViewController];
+    
+//    [[WorkoutLogStore sharedStore] all]
+    
     return YES;
 }
 
