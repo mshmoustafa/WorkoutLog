@@ -23,6 +23,25 @@
     return self;
 }
 
+- (void)dummyInit
+{
+    WorkoutPlan *plan = [[WorkoutPlan alloc] init];
+    plan.name = @"Workout Plan 1";
+    plan.days = @[@"Monday", @"Tuesday"];
+    
+    WorkoutEntryTemplate *workout = [[WorkoutEntryTemplate alloc] init];
+    workout.name = @"Workout 1";
+    workout.reps = 5;
+    workout.sets = 6;
+    workout.days = [plan.days copy];
+    workout.plan = plan.name;
+    
+    WorkoutEntryTemplate *workout1 = [workout copy];
+    workout1.name = @"Workout 2";
+    
+    plan.workoutList = @[workout, workout1];
+}
+
 + (WorkoutLogStore *)sharedStore {
     static WorkoutLogStore *sharedStore = nil;
     if (!sharedStore) {
