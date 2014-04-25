@@ -20,7 +20,6 @@
 		F04AA57018B7E7F50098554A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F04AA56E18B7E7F50098554A /* InfoPlist.strings */; };
 		F04AA57218B7E7F50098554A /* WorkoutLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F04AA57118B7E7F50098554A /* WorkoutLogTests.m */; };
 		F04AA57E18B7E8390098554A /* WorkoutEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = F04AA57D18B7E8390098554A /* WorkoutEntry.m */; };
-		F0522BF3190AA8360013AA29 /* DaySorter.m in Sources */ = {isa = PBXBuildFile; fileRef = F0522BF2190AA8360013AA29 /* DaySorter.m */; };
 		F0522BF6190ABF980013AA29 /* Day.m in Sources */ = {isa = PBXBuildFile; fileRef = F0522BF5190ABF980013AA29 /* Day.m */; };
 		F06CC52918E656A000E53769 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F06CC52818E656A000E53769 /* Storyboard.storyboard */; };
 		F082E97B18BB01A400828B91 /* WorkoutEntryTemplateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F082E97A18BB01A400828B91 /* WorkoutEntryTemplateTests.m */; };
@@ -72,8 +71,6 @@
 		F04AA57118B7E7F50098554A /* WorkoutLogTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkoutLogTests.m; sourceTree = "<group>"; };
 		F04AA57C18B7E8390098554A /* WorkoutEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutEntry.h; sourceTree = "<group>"; };
 		F04AA57D18B7E8390098554A /* WorkoutEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutEntry.m; sourceTree = "<group>"; };
-		F0522BF1190AA8360013AA29 /* DaySorter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaySorter.h; sourceTree = "<group>"; };
-		F0522BF2190AA8360013AA29 /* DaySorter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DaySorter.m; sourceTree = "<group>"; };
 		F0522BF4190ABF980013AA29 /* Day.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Day.h; sourceTree = "<group>"; };
 		F0522BF5190ABF980013AA29 /* Day.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Day.m; sourceTree = "<group>"; };
 		F06CC52818E656A000E53769 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
@@ -224,8 +221,6 @@
 				F0BBA8F118BA93EB0098E7B1 /* WorkoutPlan.m */,
 				F0BBA8ED18BA93C90098E7B1 /* WorkoutEntryTemplate.h */,
 				F0BBA8EE18BA93C90098E7B1 /* WorkoutEntryTemplate.m */,
-				F0522BF1190AA8360013AA29 /* DaySorter.h */,
-				F0522BF2190AA8360013AA29 /* DaySorter.m */,
 				F0522BF4190ABF980013AA29 /* Day.h */,
 				F0522BF5190ABF980013AA29 /* Day.m */,
 			);
@@ -420,7 +415,6 @@
 				F04AA57E18B7E8390098554A /* WorkoutEntry.m in Sources */,
 				F0F9FF9B18E664F6009225EB /* WorkoutPlansController.m in Sources */,
 				F0DF925818C55CD300E8036F /* ViewController.m in Sources */,
-				F0522BF3190AA8360013AA29 /* DaySorter.m in Sources */,
 				F0D7C0D218F2136C005DF85D /* GraphViewController.m in Sources */,
 				F0F9FF9E18E66A2E009225EB /* WorkoutPlanViewController.m in Sources */,
 				F04AA55918B7E7F50098554A /* main.m in Sources */,

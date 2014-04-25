@@ -13,9 +13,9 @@
     
 }
 
-@property (strong, nonatomic) NSString *dayName;
-@property (strong, nonatomic) NSString *shortDay;
-@property (strong, nonatomic) NSNumber *dayNumber;
+@property (copy, nonatomic) NSString *dayName;
+@property (copy, nonatomic) NSString *shortDay;
+@property (copy, nonatomic) NSNumber *dayNumber;
 
 + (Day *)getDay:(NSString *)dayString;
 
