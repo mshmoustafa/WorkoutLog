@@ -14,6 +14,9 @@ DaysOfWeek dow;
 
 @interface WorkoutEntryTemplate : WorkoutEntry
 
-@property (strong, nonatomic) NSArray *days;
+@property (strong, nonatomic) NSMutableOrderedSet *days;
+
+- (WorkoutEntry *)makeWorkoutEntryFromTemplate;
+//+ (WorkoutEntryTemplate *)createNewWorkoutEntryTemplate;
 
 @end

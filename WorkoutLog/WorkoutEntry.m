@@ -25,7 +25,7 @@
     
     //set defaults if no params are given
     //I shouldn't allow any workouts in the same plan to have the same name b/c I'll be looking up workouts based on name.  Workouts in different plans can have the same name.
-    [self setUID:[RandomString genRandStringLength:10]];
+    [self setUID:[NSNumber numberWithInt:arc4random()]];
     [self setName:nil];
     [self setDate:[NSDate date]]; //this should be the current date
     [self setReps:0];
@@ -94,6 +94,21 @@
     if (sets) {
         _sets = sets;
     }
+}
+
+- (NSString *)description
+{
+    return self.name;
+}
+
++ (WorkoutEntry *)createNewWorkout
+{
+    static int workoutCount = 0;
+    
+    WorkoutEntry *newWorkout = [[WorkoutEntry alloc] init];
+    
+    newWorkout.name = [NSString stringWithFormat:@"%@ %d", @"New Workout", workoutCount++];
+    return newWorkout;
 }
 
 @end

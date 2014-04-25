@@ -10,7 +10,7 @@
 
 @interface WorkoutPlansController : UITableViewController
 
-@property (strong, nonatomic) NSMutableArray *testObjects;
+@property (strong, nonatomic) NSMutableArray *workoutPlans;
 
 - (IBAction)addNewWorkoutPlan:(id)sender;
 

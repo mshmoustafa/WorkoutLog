@@ -10,11 +10,14 @@
 
 @interface WorkoutPlan : NSObject
 
+@property (strong, nonatomic) NSNumber *UID;
 //name of the plan
 @property (strong, nonatomic) NSString *name;
 //days the workouts in the plan should be done
-@property (strong, nonatomic) NSArray *days;
+@property (strong, nonatomic) NSMutableOrderedSet *days;
 //an array of the workout entries in the plan
-@property (strong, nonatomic) NSArray *workoutList;
+@property (strong, nonatomic) NSMutableArray *workoutEntryTemplates;
+
++ (WorkoutPlan *)createNewPlan;
 
 @end

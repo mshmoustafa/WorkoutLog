@@ -10,7 +10,7 @@
 
 @interface WorkoutEntry : NSObject
 
-@property (nonatomic) NSString *UID;
+@property (strong, nonatomic) NSNumber *UID;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) NSString *plan;
@@ -19,5 +19,7 @@
 @property (nonatomic) NSUInteger sets;
 @property (nonatomic) NSUInteger min;
 @property (nonatomic) NSUInteger sec;
+
++ (WorkoutEntry *)createNewWorkout;
 
 @end

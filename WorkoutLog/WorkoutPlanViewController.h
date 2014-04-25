@@ -13,9 +13,14 @@
 
 //@property (strong, nonatomic) WorkoutPlan *workoutPlan;
 
-@property (strong, nonatomic) NSDate *testObject;
+@property (strong, nonatomic) WorkoutPlan *workoutPlan;
 
-@property (strong, nonatomic) NSMutableArray *testArray;
+@property (strong, nonatomic) NSMutableArray *workoutEntryTemplates;
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
+
+@property (weak, nonatomic) IBOutlet UILabel *daysLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addWorkoutButton;
+
+- (IBAction)addWorkout:(id)sender;
 
 @end

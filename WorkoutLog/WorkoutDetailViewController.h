@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WorkoutEntryTemplate.h"
 
 @interface WorkoutDetailViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
-@property (strong, nonatomic) NSNumber *detailObject;
+@property (strong, nonatomic) WorkoutEntryTemplate *detailObject;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;

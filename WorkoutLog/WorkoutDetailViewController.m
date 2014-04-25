@@ -26,8 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navBar.title = [_detailObject stringValue];
-    self.detailLabel.text = [_detailObject stringValue];
+    self.navBar.title = [_detailObject description];
+    self.detailLabel.text = [_detailObject description];
 }
 
 - (void)didReceiveMemoryWarning

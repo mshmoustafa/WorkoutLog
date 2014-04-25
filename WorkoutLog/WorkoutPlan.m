@@ -14,13 +14,29 @@
 {
     self = [super init];
     if (self) {
+        self.UID = [NSNumber numberWithInt:arc4random()];
         self.name = nil;
-        self.days = nil;
-        self.workoutList = nil;
+        self.days = [[NSMutableOrderedSet alloc] init];
+        self.workoutEntryTemplates = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 #warning make methods to create new workouts
+
+- (NSString *)description
+{
+    return self.name;
+}
+
++ (WorkoutPlan *)createNewPlan
+{
+    static int planCount = 0;
+    
+    WorkoutPlan *newPlan = [[WorkoutPlan alloc] init];
+    
+    newPlan.name = [NSString stringWithFormat:@"%@ %d", @"New Plan", planCount++];
+    return newPlan;
+}
 
 @end

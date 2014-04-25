@@ -19,6 +19,10 @@
         workoutPlans = [[NSMutableArray alloc] init];
         workoutEntryTemplates = [[NSMutableArray alloc] init];
         workoutEntries = [[NSMutableArray alloc] init];
+        [self dummyInit];
+        NSLog(@"%@", workoutPlans.description);
+        NSLog(@"%@", workoutEntryTemplates.description);
+        NSLog(@"%@", workoutEntries.description);
     }
     return self;
 }
@@ -27,19 +31,28 @@
 {
     WorkoutPlan *plan = [[WorkoutPlan alloc] init];
     plan.name = @"Workout Plan 1";
-    plan.days = @[@"Monday", @"Tuesday"];
+    plan.days = [NSMutableArray arrayWithArray: @[@"Monday", @"Tuesday"]];
     
-    WorkoutEntryTemplate *workout = [[WorkoutEntryTemplate alloc] init];
-    workout.name = @"Workout 1";
-    workout.reps = 5;
-    workout.sets = 6;
-    workout.days = [plan.days copy];
-    workout.plan = plan.name;
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 2; i++) {
+        WorkoutEntryTemplate *workout = [[WorkoutEntryTemplate alloc] init];
+        workout.name = [NSString stringWithFormat:@"%@%d", @"Workout", i];
+        workout.reps = 5;
+        workout.sets = 6;
+        workout.days = [plan.days mutableCopy];
+        workout.plan = plan.name;
+        [temp addObject:workout];
+    }
     
-    WorkoutEntryTemplate *workout1 = [workout copy];
-    workout1.name = @"Workout 2";
+    plan.workoutEntryTemplates = temp;
+    workoutEntryTemplates = [NSMutableArray arrayWithArray:plan.workoutEntryTemplates];
+    workoutPlans = [NSMutableArray arrayWithArray:@[plan]];
     
-    plan.workoutList = @[workout, workout1];
+    for (int i = 0; i < 5; i++) {
+        WorkoutEntry *entry = [((WorkoutEntryTemplate *)[workoutEntryTemplates firstObject]) makeWorkoutEntryFromTemplate];
+        entry.date = [NSDate dateWithTimeIntervalSinceNow:(86400 * i)];
+        [workoutEntries addObject:entry];
+    }
 }
 
 + (WorkoutLogStore *)sharedStore {

@@ -7,7 +7,8 @@
 //
 
 #import "WorkoutPlansController.h"
-#include "WorkoutPlanViewController.h"
+#import "WorkoutPlanViewController.h"
+#import "WorkoutLogStore.h"
 
 @interface WorkoutPlansController ()
 
@@ -19,9 +20,9 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        if (!_testObjects) {
-            _testObjects = [[NSMutableArray alloc] init];
-        }
+        //        if (!_testObjects) {
+        //            _testObjects = [[WorkoutLogStore sharedStore] allWorkoutPlans];
+        //        }
     }
     return self;
 }
@@ -34,7 +35,18 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    if (!_workoutPlans) {
+        _workoutPlans = [[WorkoutLogStore sharedStore] allWorkoutPlans];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,7 +66,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return _testObjects.count;
+    NSLog(@"%lu", (unsigned long)_workoutPlans.count);
+    return _workoutPlans.count;
 }
 
 
@@ -68,33 +81,37 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    cell.textLabel.text = [[_testObjects objectAtIndex:indexPath.row] description];
+    cell.textLabel.text = [[_workoutPlans objectAtIndex:indexPath.row] description];
     
     return cell;
 }
 
 
-/*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
  {
  // Return NO if you do not want the specified item to be editable.
  return YES;
  }
- */
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+        NSLog(@"%ld, rows = %lu", indexPath.row, (unsigned long)_workoutPlans.count);
+        // Delete the row from the data source
+        [[[WorkoutLogStore sharedStore] allWorkoutPlans] removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+}
+
+
+
 
 /*
  // Override to support rearranging the table view.
@@ -122,19 +139,19 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"workoutPlan"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *selectedItem = [self.testObjects objectAtIndex:indexPath.row];
-        ((WorkoutPlanViewController *)segue.destinationViewController).testObject = selectedItem;
+        WorkoutPlan *selectedItem = [self.workoutPlans objectAtIndex:indexPath.row];
+        ((WorkoutPlanViewController *)segue.destinationViewController).workoutPlan = selectedItem;
     }
 }
 
 
 - (IBAction)addNewWorkoutPlan:(id)sender {
-    if (!_testObjects) {
-        _testObjects = [[NSMutableArray alloc] init];
+    if (!_workoutPlans) {
+        _workoutPlans = [[WorkoutLogStore sharedStore] allWorkoutPlans];
     }
-    NSDate *today = [NSDate date];
-    [_testObjects insertObject:today atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    WorkoutPlan *newPlan = [WorkoutPlan createNewPlan];
+    [_workoutPlans addObject:newPlan];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_workoutPlans.count - 1) inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 @end

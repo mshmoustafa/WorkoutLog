@@ -36,6 +36,7 @@
 //    [self.window setRootViewController:tabViewController];
     
 //    [[WorkoutLogStore sharedStore] all]
+    [WorkoutLogStore sharedStore];
     
     return YES;
 }
