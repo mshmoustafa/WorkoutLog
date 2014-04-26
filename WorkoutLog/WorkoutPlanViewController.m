@@ -10,6 +10,7 @@
 #import "WorkoutDetailViewController.h"
 #import "WorkoutPlanEditViewController.h"
 #import "WorkoutEntryTemplate.h"
+#import "Day.h"
 
 @interface WorkoutPlanViewController ()
 
@@ -44,8 +45,8 @@
     }
     
     self.daysLabel.text = @"";
-    for (NSString *day in self.workoutPlan.days) {
-        self.daysLabel.text = [self.daysLabel.text stringByAppendingString:[day substringToIndex:3]];
+    for (Day *day in self.workoutPlan.days) {
+        self.daysLabel.text = [self.daysLabel.text stringByAppendingString:day.shortDay];
         self.daysLabel.text = [self.daysLabel.text stringByAppendingString:@" "];
     }
     //    for (int i = 0; i < 3; i++) {
@@ -95,17 +96,15 @@
     return cell;
 }
 
-
-/*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
  {
  // Return NO if you do not want the specified item to be editable.
- return YES;
+ return NO;
  }
- */
 
 // Override to support editing the table view.
+/*
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -115,6 +114,7 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
 }
+ */
 
 /*
  // Override to support rearranging the table view.

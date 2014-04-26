@@ -7,6 +7,7 @@
 //
 
 #import "WorkoutLogStore.h"
+#import "Day.h"
 
 @implementation WorkoutLogStore
 
@@ -31,7 +32,8 @@
 {
     WorkoutPlan *plan = [[WorkoutPlan alloc] init];
     plan.name = @"Workout Plan 1";
-    plan.days = [NSMutableArray arrayWithArray: @[@"Monday", @"Tuesday"]];
+    Day *day1 = [Day getDay:@"Monday"];
+    plan.days = [NSMutableOrderedSet orderedSetWithArray: @[day1]];
     
     NSMutableArray *temp = [[NSMutableArray alloc] init];
     for (int i = 0; i < 2; i++) {

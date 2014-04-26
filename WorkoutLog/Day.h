@@ -10,12 +10,12 @@
 
 @interface Day : NSObject
 {
-    
 }
 
 @property (copy, nonatomic) NSString *dayName;
 @property (copy, nonatomic) NSString *shortDay;
 @property (copy, nonatomic) NSNumber *dayNumber;
+@property (strong, nonatomic) NSArray *daysOfWeek;
 
 + (Day *)getDay:(NSString *)dayString;
 

@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "WorkoutPlan.h"
 #import "WorkoutEntryTemplate.h"
+#import "Day.h"
 
 @interface WorkoutPlanTests : XCTestCase
 
@@ -35,13 +36,11 @@
 
 #warning implement tests for name, days, and workout list
 
-- (void)testWorkoutList
+- (void)testworkoutEntryTemplates
 {
     WorkoutPlan *weight = [[WorkoutPlan alloc] init];
     weight.name = @"Weights";
-    weight.days = @[[NSNumber numberWithInt:MON],
-                    [NSNumber numberWithInt:WED],
-                    [NSNumber numberWithInt:FRI]];
+    weight.days = [NSMutableOrderedSet orderedSetWithArray:@[@1, @2]];
     
     WorkoutEntryTemplate *pushups = [[WorkoutEntryTemplate alloc] init];
     pushups.name = @"Push Ups";
@@ -52,10 +51,10 @@
     pushups.sec = 0;
     pushups.plan = weight.name;
     
-    weight.workoutList = @[pushups];
-    XCTAssertEqual(weight.workoutList.count, 1U);
+    weight.workoutEntryTemplates = [NSMutableArray arrayWithArray:@[pushups]];
+    XCTAssertEqual(weight.workoutEntryTemplates.count, 1U);
     XCTAssertEqualObjects(pushups.plan, weight.name);
-    XCTAssertEqualObjects([weight.workoutList objectAtIndex:0U], pushups);
+    XCTAssertEqualObjects([weight.workoutEntryTemplates objectAtIndex:0U], pushups);
 }
 
 @end

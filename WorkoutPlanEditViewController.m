@@ -8,6 +8,7 @@
 
 #import "WorkoutPlanEditViewController.h"
 #import "WorkoutEntryTemplate.h"
+#import "Day.h"
 
 @interface WorkoutPlanEditViewController ()
 
@@ -43,10 +44,10 @@
     self.workoutPlanName.text = self.workoutPlan.name;
     for (UIButton *button in self.dayButtons) {
         NSLog(@"%@", button.currentTitle);
-        for (NSString *day in self.workoutPlan.days) {
-            if ([button.currentTitle isEqualToString:[day substringToIndex:3]]) {
+        for (Day *day in self.workoutPlan.days) {
+            if ([button.currentTitle isEqualToString:day.shortDay]) {
                 button.backgroundColor = [UIColor colorWithRed:0.91 green:0.94 blue:0.98 alpha:1.0];
-                [self.selectedDayButtons addObject:[day substringToIndex:3]];
+                [self.selectedDayButtons addObject:day];
             }
         }
     }
@@ -147,9 +148,20 @@
     UIButton *button = (UIButton *)sender;
     if (button.backgroundColor == nil) {
         button.backgroundColor = [UIColor colorWithRed:0.91 green:0.94 blue:0.98 alpha:1.0];
-        [self.selectedDayButtons addObject:button.currentTitle];
+        [self.selectedDayButtons addObject:[Day getDay:button.currentTitle]];
+        [self.selectedDayButtons sortUsingComparator:^(Day *day1, Day *day2) {
+            
+            if (day1.dayNumber > day2.dayNumber) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+            
+            if (day1.dayNumber < day2.dayNumber) {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            return (NSComparisonResult)NSOrderedSame;
+        }];
     } else {
-        [self.selectedDayButtons removeObject:button.currentTitle];
+        [self.selectedDayButtons removeObject:[Day getDay:button.currentTitle]];
         button.backgroundColor = nil;
     }
 }
@@ -158,17 +170,22 @@
     if (![self.workoutPlanName.text isEqualToString:@""]) {
         self.workoutPlan.name = self.workoutPlanName.text;
     }
-    NSMutableArray *temp = [[NSMutableArray alloc] init];
-    for (NSString *day in self.selectedDayButtons) {
-        if ([day isEqualToString:@"Mon"]) {[temp addObject:@"Monday"];}
-        else if ([day isEqualToString:@"Tue"]) {[temp addObject:@"Tuesday"];}
-        else if ([day isEqualToString:@"Wed"]) {[temp addObject:@"Wednesday"];}
-        else if ([day isEqualToString:@"Thu"]) {[temp addObject:@"Thursday"];}
-        else if ([day isEqualToString:@"Fri"]) {[temp addObject:@"Friday"];}
-        else if ([day isEqualToString:@"Sat"]) {[temp addObject:@"Saturday"];}
-        else if ([day isEqualToString:@"Sun"]) {[temp addObject:@"Sunday"];}
+    NSMutableOrderedSet *temp = [[NSMutableOrderedSet alloc] init];
+    for (Day *day in self.selectedDayButtons) {
+        [temp addObject:day];
     }
-    self.workoutPlan.days = [NSMutableArray arrayWithArray:temp];
+    [temp sortUsingComparator:^(Day *day1, Day *day2) {
+        
+        if (day1.dayNumber > day2.dayNumber) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        
+        if (day1.dayNumber < day2.dayNumber) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    self.workoutPlan.days = temp;
 #warning For some reason, the presenting view controller doesn't refresh
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
