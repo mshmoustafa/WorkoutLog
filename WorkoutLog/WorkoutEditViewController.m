@@ -56,6 +56,8 @@
     self.repsStepper.value = self.workoutTemplate.reps;
     self.setsLabel.text = [[NSNumber numberWithInt:self.workoutTemplate.sets] stringValue];
     self.setsStepper.value = self.workoutTemplate.sets;
+    self.weightLabel.text = [[NSNumber numberWithInt:self.workoutTemplate.weight] stringValue];
+    self.weightStepper.value = self.workoutTemplate.weight;
 }
 
 - (void)viewDidLoad
@@ -152,10 +154,15 @@
     self.setsLabel.text = [[NSNumber numberWithDouble:self.setsStepper.value] stringValue];
 }
 
+- (IBAction)weightStepperChanged:(id)sender {
+    self.weightLabel.text = [[NSNumber numberWithDouble:self.weightStepper.value] stringValue];
+}
+
 - (IBAction)done:(id)sender {
     self.workoutTemplate.name = self.nameLabel.text;
     self.workoutTemplate.reps = [self.repsLabel.text integerValue];
     self.workoutTemplate.sets = [self.setsLabel.text integerValue];
+    self.workoutTemplate.weight = [self.weightLabel.text integerValue];
     self.workoutTemplate.min = self.selectedMinutes;
     self.workoutTemplate.sec = self.selectedSeconds;
     

@@ -32,6 +32,7 @@
 #warning *aesthetic: don't show fields that aren't set
     self.repsLabel.text = [[NSNumber numberWithInt:self.detailObject.reps] stringValue];
     self.setsLabel.text = [[NSNumber numberWithInt:self.detailObject.sets] stringValue];
+    self.weightLabel.text = [[NSNumber numberWithInt:self.detailObject.weight] stringValue];
     self.minutesLabel.text = [[NSNumber numberWithInt:self.detailObject.min] stringValue];
     self.secondsLabel.text = [[NSNumber numberWithInt:self.detailObject.sec] stringValue];
 }

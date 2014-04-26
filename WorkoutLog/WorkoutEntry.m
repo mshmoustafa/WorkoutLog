@@ -16,6 +16,7 @@
 @synthesize date = _date;
 @synthesize reps = _reps;
 @synthesize sets = _sets;
+@synthesize weight = _weight;
 
 #pragma mark - Initialization
 
@@ -30,6 +31,7 @@
     [self setDate:[NSDate date]]; //this should be the current date
     [self setReps:0];
     [self setSets:0];
+    [self setWeight:0];
     [self setMin:0];
     [self setSec:0];
     

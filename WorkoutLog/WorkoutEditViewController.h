@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIStepper *repsStepper;
 @property (weak, nonatomic) IBOutlet UITextField *setsLabel;
 @property (weak, nonatomic) IBOutlet UIStepper *setsStepper;
+@property (weak, nonatomic) IBOutlet UITextField *weightLabel;
+@property (weak, nonatomic) IBOutlet UIStepper *weightStepper;
 @property (weak, nonatomic) IBOutlet UIPickerView *minutesPicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *secondsPicker;
 
@@ -30,6 +32,7 @@
 
 - (IBAction)repStepperChanged:(id)sender;
 - (IBAction)setsStepperChanged:(id)sender;
+- (IBAction)weightStepperChanged:(id)sender;
 
 - (IBAction)done:(id)sender;
 

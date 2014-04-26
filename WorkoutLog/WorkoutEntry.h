@@ -17,6 +17,7 @@
 
 @property (nonatomic) NSUInteger reps;
 @property (nonatomic) NSUInteger sets;
+@property (nonatomic) NSUInteger weight;
 @property (nonatomic) NSUInteger min;
 @property (nonatomic) NSUInteger sec;
 

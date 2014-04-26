@@ -41,6 +41,7 @@
         workout.name = [NSString stringWithFormat:@"%@%d", @"Workout", i];
         workout.reps = 5;
         workout.sets = 6;
+        workout.weight = 30;
         workout.days = [plan.days mutableCopy];
         workout.plan = plan.name;
         [temp addObject:workout];
