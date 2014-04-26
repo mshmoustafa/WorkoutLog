@@ -7,8 +7,11 @@
 //
 
 #import "WorkoutPlan.h"
+#import "WorkoutEntryTemplate.h"
 
 @implementation WorkoutPlan
+
+@synthesize name = _name;
 
 - (id)init
 {
@@ -27,6 +30,14 @@
 - (NSString *)description
 {
     return self.name;
+}
+
+- (void)setName:(NSString *)name
+{
+    _name = name;
+    for (WorkoutEntryTemplate *workout in self.workoutEntryTemplates) {
+        workout.plan = _name;
+    }
 }
 
 + (WorkoutPlan *)createNewPlan

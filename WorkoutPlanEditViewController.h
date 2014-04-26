@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "WorkoutPlan.h"
+#import "WorkoutEditViewController.h"
 
-@interface WorkoutPlanEditViewController : UITableViewController
+@interface WorkoutPlanEditViewController : UITableViewController <UITextFieldDelegate>
 
 @property (nonatomic, copy) void (^dismissBlock)(void);
 
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *workoutPlanName;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *dayButtons;
 @property (strong, nonatomic) NSMutableOrderedSet *selectedDayButtons;
+@property (weak, nonatomic) WorkoutEditViewController *editViewController;
 
 - (IBAction)clickedDayButton:(id)sender;
 

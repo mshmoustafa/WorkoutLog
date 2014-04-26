@@ -7,6 +7,7 @@
 //
 
 #import "WorkoutPlanEditViewController.h"
+#import "workoutEditViewController.h"
 #import "WorkoutEntryTemplate.h"
 #import "Day.h"
 
@@ -91,6 +92,14 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    WorkoutEntryTemplate *selectedItem = [self.workoutPlan.workoutEntryTemplates objectAtIndex:indexPath.row];
+    self.editViewController.workoutTemplate = selectedItem;
+    [self.editViewController.view setNeedsDisplay];
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -128,7 +137,6 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -136,8 +144,17 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"EditWorkoutEntryTemplate"]) {
+        
+        self.editViewController = (WorkoutEditViewController *)segue.destinationViewController;
+        
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        
+//        WorkoutEntryTemplate *selectedItem = [self.workoutPlan.workoutEntryTemplates objectAtIndex:indexPath.row];
+//        NSLog(@"selected item: %@", selectedItem.name);
+//        ((WorkoutEditViewController *)segue.destinationViewController).workoutTemplate = selectedItem;
+    }
 }
-*/
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
@@ -188,5 +205,23 @@
     self.workoutPlan.days = temp;
 #warning For some reason, the presenting view controller doesn't refresh
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [[self.view superview] resignFirstResponder];
+    [self.view resignFirstResponder];
+    [self.view endEditing:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    return YES;
 }
 @end

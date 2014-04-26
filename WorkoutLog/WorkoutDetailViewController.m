@@ -7,6 +7,7 @@
 //
 
 #import "WorkoutDetailViewController.h"
+#import "WorkoutEditViewController.h"
 
 @interface WorkoutDetailViewController ()
 
@@ -41,7 +42,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -49,14 +49,12 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"EditWorkoutEntryTemplate"]) {
+        ((WorkoutEditViewController *)segue.destinationViewController).workoutTemplate = self.detailObject;
+    }
 }
-*/
 
 - (IBAction)done:(id)sender {
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)save:(id)sender {
-    [self done:sender];
 }
 @end
