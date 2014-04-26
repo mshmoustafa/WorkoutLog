@@ -469,6 +469,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="JMj-5A-PJN" kind="modal" id="G9W-9A-UfW"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -508,7 +511,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKd-zR-grg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2122" y="-1366"/>
+            <point key="canvasLocation" x="2266" y="-1359"/>
         </scene>
         <!--Workout Detail View Controller - WorkoutDetail-->
         <scene sceneID="N2N-5s-6p1">
@@ -534,14 +537,15 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Title" id="Dzi-29-O0G">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Lee-5B-kGI">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Lee-5B-kGI">
                                             <connections>
                                                 <action selector="cancel:" destination="gOu-Cr-R4l" id="YCP-LW-ZSz"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="VkG-QZ-xK0">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="VkG-QZ-xK0">
                                             <connections>
                                                 <action selector="save:" destination="gOu-Cr-R4l" id="0BV-LC-EZ1"/>
+                                                <segue destination="JMj-5A-PJN" kind="modal" id="1d6-gG-RcF"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -586,4 +590,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="1d6-gG-RcF"/>
+    </inferredMetricsTieBreakers>
 </document>
