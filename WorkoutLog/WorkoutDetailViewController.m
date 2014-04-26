@@ -26,8 +26,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navBar.title = [_detailObject description];
-    self.detailLabel.text = [_detailObject description];
+    self.navBar.title = [_detailObject name];
+    self.planName.text = self.detailObject.plan;
+#warning *aesthetic: don't show fields that aren't set
+    self.repsLabel.text = [[NSNumber numberWithInt:self.detailObject.reps] stringValue];
+    self.setsLabel.text = [[NSNumber numberWithInt:self.detailObject.sets] stringValue];
+    self.minutesLabel.text = [[NSNumber numberWithInt:self.detailObject.min] stringValue];
+    self.secondsLabel.text = [[NSNumber numberWithInt:self.detailObject.sec] stringValue];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,11 +52,11 @@
 }
 */
 
-- (IBAction)cancel:(id)sender {
+- (IBAction)done:(id)sender {
     [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)save:(id)sender {
-    [self cancel:sender];
+    [self done:sender];
 }
 @end

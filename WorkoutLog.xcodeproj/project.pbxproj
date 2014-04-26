@@ -22,6 +22,7 @@
 		F04AA57E18B7E8390098554A /* WorkoutEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = F04AA57D18B7E8390098554A /* WorkoutEntry.m */; };
 		F0522BF6190ABF980013AA29 /* Day.m in Sources */ = {isa = PBXBuildFile; fileRef = F0522BF5190ABF980013AA29 /* Day.m */; };
 		F06CC52918E656A000E53769 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F06CC52818E656A000E53769 /* Storyboard.storyboard */; };
+		F07572CA190B568B00DE0BB3 /* WorkoutEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07572C9190B568B00DE0BB3 /* WorkoutEditViewController.m */; };
 		F082E97B18BB01A400828B91 /* WorkoutEntryTemplateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F082E97A18BB01A400828B91 /* WorkoutEntryTemplateTests.m */; };
 		F082E97D18BB086B00828B91 /* WorkoutPlanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F082E97C18BB086B00828B91 /* WorkoutPlanTests.m */; };
 		F082E98118BB0E6F00828B91 /* WorkoutLogStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F082E98018BB0E6F00828B91 /* WorkoutLogStore.m */; };
@@ -74,6 +75,8 @@
 		F0522BF4190ABF980013AA29 /* Day.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Day.h; sourceTree = "<group>"; };
 		F0522BF5190ABF980013AA29 /* Day.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Day.m; sourceTree = "<group>"; };
 		F06CC52818E656A000E53769 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		F07572C8190B568B00DE0BB3 /* WorkoutEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutEditViewController.h; sourceTree = "<group>"; };
+		F07572C9190B568B00DE0BB3 /* WorkoutEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutEditViewController.m; sourceTree = "<group>"; };
 		F082E97A18BB01A400828B91 /* WorkoutEntryTemplateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutEntryTemplateTests.m; sourceTree = "<group>"; };
 		F082E97C18BB086B00828B91 /* WorkoutPlanTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutPlanTests.m; sourceTree = "<group>"; };
 		F082E97F18BB0E6F00828B91 /* WorkoutLogStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutLogStore.h; sourceTree = "<group>"; };
@@ -238,6 +241,8 @@
 				F0F9FF9D18E66A2E009225EB /* WorkoutPlanViewController.m */,
 				F0F9FFA218E6768D009225EB /* WorkoutDetailViewController.h */,
 				F0F9FFA318E6768D009225EB /* WorkoutDetailViewController.m */,
+				F07572C8190B568B00DE0BB3 /* WorkoutEditViewController.h */,
+				F07572C9190B568B00DE0BB3 /* WorkoutEditViewController.m */,
 			);
 			name = WorkoutPlansTab;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 				F04AA55D18B7E7F50098554A /* AppDelegate.m in Sources */,
 				F0D7C0C418F1E49B005DF85D /* WorkoutLogViewController.m in Sources */,
 				F0D7C0CB18F1F881005DF85D /* TodayTableViewController.m in Sources */,
+				F07572CA190B568B00DE0BB3 /* WorkoutEditViewController.m in Sources */,
 				F0D7C11018F2168A005DF85D /* GraphView.m in Sources */,
 				F0F9FFA418E6768D009225EB /* WorkoutDetailViewController.m in Sources */,
 				F0BBA8F518BA9FBD0098E7B1 /* RandomString.m in Sources */,

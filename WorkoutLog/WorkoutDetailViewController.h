@@ -13,8 +13,16 @@
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
 @property (strong, nonatomic) WorkoutEntryTemplate *detailObject;
-@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
-- (IBAction)cancel:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *planName;
+@property (weak, nonatomic) IBOutlet UILabel *repsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *setsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *minutesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *secondsLabel;
+
+
+
+
+- (IBAction)done:(id)sender;
 - (IBAction)save:(id)sender;
 
 @end
