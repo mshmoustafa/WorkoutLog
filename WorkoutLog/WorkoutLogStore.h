@@ -26,5 +26,6 @@
 - (NSMutableArray *)allWorkoutPlans;
 - (NSMutableArray *)allWorkoutEntryTemplates;
 - (NSMutableArray *)allWorkoutEntries;
+- (NSMutableArray *)allWorkoutEntriesByDate;
 
 @end

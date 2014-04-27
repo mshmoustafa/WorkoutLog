@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F0164754190C815900BFAE95 /* WorkoutsOnDate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0164753190C815900BFAE95 /* WorkoutsOnDate.m */; };
 		F04AA54D18B7E7F50098554A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04AA54C18B7E7F50098554A /* Foundation.framework */; };
 		F04AA54F18B7E7F50098554A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04AA54E18B7E7F50098554A /* CoreGraphics.framework */; };
 		F04AA55118B7E7F50098554A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04AA55018B7E7F50098554A /* UIKit.framework */; };
@@ -54,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F0164752190C815900BFAE95 /* WorkoutsOnDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutsOnDate.h; sourceTree = "<group>"; };
+		F0164753190C815900BFAE95 /* WorkoutsOnDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutsOnDate.m; sourceTree = "<group>"; };
 		F04AA54918B7E7F50098554A /* WorkoutLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04AA54C18B7E7F50098554A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F04AA54E18B7E7F50098554A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -226,6 +229,8 @@
 				F0BBA8EE18BA93C90098E7B1 /* WorkoutEntryTemplate.m */,
 				F0522BF4190ABF980013AA29 /* Day.h */,
 				F0522BF5190ABF980013AA29 /* Day.m */,
+				F0164752190C815900BFAE95 /* WorkoutsOnDate.h */,
+				F0164753190C815900BFAE95 /* WorkoutsOnDate.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -408,6 +413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0164754190C815900BFAE95 /* WorkoutsOnDate.m in Sources */,
 				F0522BF6190ABF980013AA29 /* Day.m in Sources */,
 				F04AA55D18B7E7F50098554A /* AppDelegate.m in Sources */,
 				F0D7C0C418F1E49B005DF85D /* WorkoutLogViewController.m in Sources */,

@@ -37,6 +37,7 @@
     
 //    [[WorkoutLogStore sharedStore] all]
     [WorkoutLogStore sharedStore];
+    [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
     
     return YES;
 }
