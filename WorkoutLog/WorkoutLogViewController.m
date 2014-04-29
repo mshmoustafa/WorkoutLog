@@ -7,6 +7,8 @@
 //
 
 #import "WorkoutLogViewController.h"
+#import "WorkoutLogStore.h"
+#import "WorkoutsOnDate.h"
 
 @interface WorkoutLogViewController ()
 
@@ -18,9 +20,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        if (!self.testObjects) {
-            self.testObjects = [[NSMutableArray alloc] init];
-        }
+        
     }
     return self;
 }
@@ -34,6 +34,16 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    if (!self.workoutLogEntries) {
+        self.workoutLogEntries = [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    return;
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,14 +58,25 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    return self.workoutLogEntries.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.testObjects.count;
+    WorkoutsOnDate *workouts = [self.workoutLogEntries objectAtIndex:section];
+    
+    return workouts.workoutEntries.count;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    WorkoutsOnDate *workouts = [self.workoutLogEntries objectAtIndex:section];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    return [formatter stringFromDate: workouts.date];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -64,7 +85,20 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = [[self.testObjects objectAtIndex:indexPath.row] description];
+    WorkoutsOnDate *workouts = [self.workoutLogEntries objectAtIndex:indexPath.section];
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    //ERROR
+    WorkoutEntry *workout = [workouts.workoutEntries objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = workout.name;
+//    cell.textLabel.text = [[NSNumber numberWithInt:row] description];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    cell.detailTextLabel.text = [formatter stringFromDate:workout.date];
     
     return cell;
 }
@@ -79,15 +113,19 @@
 */
 
 // Override to support editing the table view.
+/*
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        WorkoutsOnDate *workouts = [self.workoutLogEntries objectAtIndex:indexPath.section];
+        
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
+ */
 
 
 /*
@@ -118,10 +156,10 @@
 
 - (IBAction)addWorkout:(id)sender {
     NSLog(@"Add button clicked");
-    if (!self.testObjects) {
-        self.testObjects = [[NSMutableArray alloc] init];
+    if (!self.workoutLogEntries) {
+        self.workoutLogEntries = [[NSMutableArray alloc] init];
     }
-    [self.testObjects addObject:[NSDate date]];
+    [self.workoutLogEntries addObject:[NSDate date]];
     [self.tableView reloadData];
 }
 

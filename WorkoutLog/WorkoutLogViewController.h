@@ -10,7 +10,7 @@
 
 @interface WorkoutLogViewController : UITableViewController
 
-@property (strong, nonatomic) NSMutableArray *testObjects;
+@property (strong, nonatomic) NSMutableArray *workoutLogEntries;
 
 - (IBAction)addWorkout:(id)sender;
 

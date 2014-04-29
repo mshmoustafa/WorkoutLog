@@ -10,6 +10,8 @@
 
 @interface WorkoutLogDetailViewController : UIViewController
 
+
+
 - (IBAction)cancel:(id)sender;
 
 @end
