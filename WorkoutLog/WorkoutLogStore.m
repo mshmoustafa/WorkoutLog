@@ -52,13 +52,16 @@
     workoutEntryTemplates = [NSMutableArray arrayWithArray:plan.workoutEntryTemplates];
     workoutPlans = [NSMutableArray arrayWithArray:@[plan]];
     
-    NSDate *now = [NSDate date];
+    NSDate *todayMidnight = [NSDate date];
+    
+    todayMidnight = [WorkoutLogStore dateMidnight:todayMidnight];
     
     for (int i = 0; i < 5; i++) {
         WorkoutEntry *entry = [((WorkoutEntryTemplate *)[workoutEntryTemplates firstObject]) makeWorkoutEntryFromTemplate];
-        entry.date = [NSDate dateWithTimeInterval:(86400 * i) sinceDate:now];
+        entry.date = [NSDate dateWithTimeInterval:(86400 * i) sinceDate:todayMidnight];
         WorkoutEntry *entry1 = [((WorkoutEntryTemplate *)[workoutEntryTemplates lastObject]) makeWorkoutEntryFromTemplate];
-        entry1.date = [NSDate dateWithTimeInterval:(86400 * i) sinceDate:now];
+        entry1.date = [NSDate dateWithTimeInterval:(86400 * i) sinceDate:todayMidnight];
+//        NSLog(@"Workout entry dates: %@ - %@", entry.date, entry1.date);
         [workoutEntries addObject:entry];
         [workoutEntries addObject:entry1];
     }
@@ -126,5 +129,19 @@
 }
 
 #warning make methods that can create plans, workout templates, and workout entries
+
++ (NSDate *)dateMidnight:(NSDate *)date
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *Midnight = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSTimeZoneCalendarUnit) fromDate:date];
+    
+    Midnight.hour = 0;
+    Midnight.minute = 0;
+    Midnight.second = 0;
+    Midnight.timeZone = [[NSCalendar currentCalendar] timeZone];
+    
+    date = [calendar dateFromComponents:Midnight];
+    return date;
+}
 
 @end
