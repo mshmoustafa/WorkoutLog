@@ -113,4 +113,22 @@
     return newWorkout;
 }
 
+//- (BOOL)isEqual:(id)object
+//{
+//    WorkoutEntry *entry = object;
+//    if (!([self.date compare:entry.date] == NSOrderedSame)) {
+//        return NO;
+//    } else if (![self.name isEqualToString:entry.name]) {
+//        return NO;
+//    } else if (![self.plan isEqualToString:entry.plan]) {
+//        return NO;
+//    } else if (!self.reps != entry.reps) {
+//        return NO;
+//    } else if (!self.sets != entry.sets) {
+//        return NO;
+//    } else if (!self.weight != entry.weight) {
+//        return NO;
+//    }
+//}
+
 @end

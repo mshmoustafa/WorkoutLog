@@ -126,6 +126,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="todayworkoutcell" rowHeight="75" id="gBA-ep-PqS" customClass="TodayWorkoutTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="75"/>
@@ -146,19 +147,22 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="8hZ-zL-XGi">
-                                            <rect key="frame" x="216" y="22" width="94" height="29"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EnU-R1-zCc">
+                                            <rect key="frame" x="273" y="22" width="27" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Edit">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
                                             <connections>
-                                                <action selector="stepperTapped:" destination="gBA-ep-PqS" eventType="valueChanged" id="4Gk-H8-5BR"/>
+                                                <segue destination="JMj-5A-PJN" kind="modal" id="GEt-MX-0Z3"/>
                                             </connections>
-                                        </stepper>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="editButton" destination="EnU-R1-zCc" id="diN-dP-VFj"/>
                                     <outlet property="workoutInfoLabel" destination="zuE-uN-l3c" id="Nur-Fz-Aq8"/>
                                     <outlet property="workoutNameLabel" destination="UrL-ov-Asx" id="sN2-4m-Jpu"/>
-                                    <outlet property="workoutStepper" destination="8hZ-zL-XGi" id="0vJ-uo-f7V"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -863,6 +867,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="o07-hk-oSx"/>
-        <segue reference="j3i-h4-1NE"/>
+        <segue reference="GEt-MX-0Z3"/>
     </inferredMetricsTieBreakers>
 </document>

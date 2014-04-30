@@ -66,6 +66,8 @@
         [workoutEntries addObject:entry1];
     }
     
+    [self todayWorkoutEntryTemplates];
+    
 }
 
 + (WorkoutLogStore *)sharedStore {
@@ -126,6 +128,35 @@
         [workoutEntriesByDate addObject:temp];
     }
     return workoutEntriesByDate;
+}
+
+- (NSMutableArray *)todayWorkoutEntryTemplates
+{
+    NSMutableOrderedSet *todaysPlans = [[NSMutableOrderedSet alloc] init];
+    NSMutableArray *todaysWorkouts = [[NSMutableArray alloc] init];
+    
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    
+    NSDateComponents *components = [cal components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+//    NSLog(@"Today is: %d", components.weekday);
+    
+    Day *today = [Day getDayByNumber:[NSNumber numberWithInt:components.weekday]];
+    
+    for (WorkoutPlan *plan in [[WorkoutLogStore sharedStore] allWorkoutPlans]) {
+        for (Day *day in plan.days) {
+            if ([day isEqual:today]) {
+                [todaysPlans addObject:plan];
+            }
+        }
+    }
+    
+    for (WorkoutPlan *plan in todaysPlans) {
+        for (WorkoutEntryTemplate *template in plan.workoutEntryTemplates) {
+            [todaysWorkouts addObject:template];
+        }
+    }
+    
+    return todaysWorkouts;
 }
 
 #warning make methods that can create plans, workout templates, and workout entries

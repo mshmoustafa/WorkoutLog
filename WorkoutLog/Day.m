@@ -10,9 +10,15 @@
 
 NSArray *daysOfWeek;
 
+@interface Day ()
+
++ (void)initializeDaysOfWeek;
+
+@end
+
 @implementation Day
 
-+ (Day *)getDay:(NSString *)dayString
++ (void)initializeDaysOfWeek
 {
     static BOOL initialized = NO;
     if (initialized == NO) {
@@ -50,6 +56,11 @@ NSArray *daysOfWeek;
         
         initialized = YES;
     }
+}
+
++ (Day *)getDay:(NSString *)dayString
+{
+    [Day initializeDaysOfWeek];
     
     for (Day *day in daysOfWeek) {
         if ([dayString isEqualToString:day.dayName] || [dayString isEqualToString:day.shortDay]) {
@@ -87,6 +98,16 @@ NSArray *daysOfWeek;
 //        day.shortDay = [dayString substringToIndex:3];
 //        day.dayNumber = @7;
 //    }
+}
+
++ (Day *)getDayByNumber:(NSNumber *)number
+{
+    for (Day *day in daysOfWeek) {
+        if ([day.dayNumber isEqualToNumber:number]) {
+            return day;
+        }
+    }
+    return nil;
 }
 
 - (NSString *)description

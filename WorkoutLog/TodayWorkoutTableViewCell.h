@@ -11,7 +11,11 @@
 @interface TodayWorkoutTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *workoutNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *workoutInfoLabel;
-@property (weak, nonatomic) IBOutlet UIStepper *workoutStepper;
-- (IBAction)stepperTapped:(id)sender;
+//@property (weak, nonatomic) IBOutlet UIStepper *workoutStepper;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+
+
+
+//- (IBAction)stepperTapped:(id)sender;
 
 @end

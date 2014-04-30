@@ -34,6 +34,7 @@
     entry.name = [NSString stringWithString:self.name];
     entry.reps = self.reps;
     entry.sets = self.sets;
+    entry.weight = self.weight;
     entry.min = self.min;
     entry.sec = self.sec;
     entry.plan = [self.plan mutableCopy];

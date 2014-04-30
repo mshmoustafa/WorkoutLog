@@ -30,6 +30,7 @@
 - (NSMutableArray *)allWorkoutEntryTemplates;
 - (NSMutableArray *)allWorkoutEntries;
 - (NSMutableArray *)allWorkoutEntriesByDate;
+- (NSMutableArray *)todayWorkoutEntryTemplates;
 
 #pragma mark - Time Convenience Methods
 

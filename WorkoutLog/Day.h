@@ -18,5 +18,6 @@
 @property (strong, nonatomic) NSArray *daysOfWeek;
 
 + (Day *)getDay:(NSString *)dayString;
++ (Day *)getDayByNumber:(NSNumber *)number;
 
 @end
