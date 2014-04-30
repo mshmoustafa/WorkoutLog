@@ -27,6 +27,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (shouldShowDateTitleAndLabel) {
+        self.dateTitle.hidden = NO;
+        self.dateLabel.hidden = NO;
+    }
+    
     self.navBar.title = [_detailObject name];
     self.planName.text = self.detailObject.plan;
 #warning *aesthetic: don't show fields that aren't set
@@ -35,6 +41,12 @@
     self.weightLabel.text = [[NSNumber numberWithInt:self.detailObject.weight] stringValue];
     self.minutesLabel.text = [[NSNumber numberWithInt:self.detailObject.min] stringValue];
     self.secondsLabel.text = [[NSNumber numberWithInt:self.detailObject.sec] stringValue];
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    self.dateLabel.text = [formatter stringFromDate:self.detailObject.date];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,10 +64,17 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"EditWorkoutEntryTemplate"]) {
         ((WorkoutEditViewController *)segue.destinationViewController).workoutTemplate = self.detailObject;
+        
+        [((WorkoutEditViewController *)segue.destinationViewController) shouldShowDateButton:shouldShowDateTitleAndLabel];
     }
 }
 
+- (void)shouldShowDateTitleAndLabel:(BOOL)yesOrNo
+{
+    shouldShowDateTitleAndLabel = yesOrNo;
+}
+
 - (IBAction)done:(id)sender {
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 @end

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WorkoutEntry.h"
 
 @interface WorkoutLogDetailViewController : UIViewController
 
+@property (strong, nonatomic) WorkoutEntry *workout;
 
+@property (weak, nonatomic) IBOutlet UITextField *workoutName;
 
 - (IBAction)cancel:(id)sender;
 

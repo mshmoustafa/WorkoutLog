@@ -10,8 +10,13 @@
 #import "WorkoutEntryTemplate.h"
 
 @interface WorkoutEditViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+{
+    BOOL shouldShowDateButton;
+}
 
-@property (weak, nonatomic) WorkoutEntryTemplate *workoutTemplate;
+//Changed this property from WorkoutEntryTemplate to WorkoutEntry
+//so that this view controller can accept both templates and entries.
+@property (weak, nonatomic) WorkoutEntry *workoutTemplate;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *planLabel;
@@ -24,15 +29,20 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *minutesPicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *secondsPicker;
 
+@property (weak, nonatomic) IBOutlet UIButton *dateButton;
+
 @property (nonatomic) NSUInteger selectedMinutes;
 @property (nonatomic) NSUInteger selectedSeconds;
 
 @property (strong, nonatomic) NSMutableArray *minutes;
 @property (strong, nonatomic) NSMutableArray *seconds;
 
+- (void)shouldShowDateButton:(BOOL)yesOrNo;
+
 - (IBAction)repStepperChanged:(id)sender;
 - (IBAction)setsStepperChanged:(id)sender;
 - (IBAction)weightStepperChanged:(id)sender;
+- (IBAction)dateButtonClicked:(UIButton *)button;
 
 - (IBAction)done:(id)sender;
 

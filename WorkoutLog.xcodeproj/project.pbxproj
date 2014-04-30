@@ -27,6 +27,7 @@
 		F082E97B18BB01A400828B91 /* WorkoutEntryTemplateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F082E97A18BB01A400828B91 /* WorkoutEntryTemplateTests.m */; };
 		F082E97D18BB086B00828B91 /* WorkoutPlanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F082E97C18BB086B00828B91 /* WorkoutPlanTests.m */; };
 		F082E98118BB0E6F00828B91 /* WorkoutLogStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F082E98018BB0E6F00828B91 /* WorkoutLogStore.m */; };
+		F097EA211910986D00D0531F /* DateEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F097EA201910986D00D0531F /* DateEditViewController.m */; };
 		F097EBBA190A004C007C84AD /* WorkoutPlanEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F097EBB9190A004C007C84AD /* WorkoutPlanEditViewController.m */; };
 		F0BBA8EF18BA93C90098E7B1 /* WorkoutEntryTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0BBA8EE18BA93C90098E7B1 /* WorkoutEntryTemplate.m */; };
 		F0BBA8F218BA93EB0098E7B1 /* WorkoutPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = F0BBA8F118BA93EB0098E7B1 /* WorkoutPlan.m */; };
@@ -84,6 +85,8 @@
 		F082E97C18BB086B00828B91 /* WorkoutPlanTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutPlanTests.m; sourceTree = "<group>"; };
 		F082E97F18BB0E6F00828B91 /* WorkoutLogStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutLogStore.h; sourceTree = "<group>"; };
 		F082E98018BB0E6F00828B91 /* WorkoutLogStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutLogStore.m; sourceTree = "<group>"; };
+		F097EA1F1910986D00D0531F /* DateEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateEditViewController.h; sourceTree = "<group>"; };
+		F097EA201910986D00D0531F /* DateEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateEditViewController.m; sourceTree = "<group>"; };
 		F097EBB8190A004C007C84AD /* WorkoutPlanEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkoutPlanEditViewController.h; path = ../WorkoutPlanEditViewController.h; sourceTree = "<group>"; };
 		F097EBB9190A004C007C84AD /* WorkoutPlanEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkoutPlanEditViewController.m; path = ../WorkoutPlanEditViewController.m; sourceTree = "<group>"; };
 		F0BBA8ED18BA93C90098E7B1 /* WorkoutEntryTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutEntryTemplate.h; sourceTree = "<group>"; };
@@ -248,6 +251,8 @@
 				F0F9FFA318E6768D009225EB /* WorkoutDetailViewController.m */,
 				F07572C8190B568B00DE0BB3 /* WorkoutEditViewController.h */,
 				F07572C9190B568B00DE0BB3 /* WorkoutEditViewController.m */,
+				F097EA1F1910986D00D0531F /* DateEditViewController.h */,
+				F097EA201910986D00D0531F /* DateEditViewController.m */,
 			);
 			name = WorkoutPlansTab;
 			sourceTree = "<group>";
@@ -418,6 +423,7 @@
 				F04AA55D18B7E7F50098554A /* AppDelegate.m in Sources */,
 				F0D7C0C418F1E49B005DF85D /* WorkoutLogViewController.m in Sources */,
 				F0D7C0CB18F1F881005DF85D /* TodayTableViewController.m in Sources */,
+				F097EA211910986D00D0531F /* DateEditViewController.m in Sources */,
 				F07572CA190B568B00DE0BB3 /* WorkoutEditViewController.m in Sources */,
 				F0D7C11018F2168A005DF85D /* GraphView.m in Sources */,
 				F0F9FFA418E6768D009225EB /* WorkoutDetailViewController.m in Sources */,

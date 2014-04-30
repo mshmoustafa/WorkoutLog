@@ -147,6 +147,7 @@
     if ([segue.identifier isEqualToString:@"EditWorkoutEntryTemplate"]) {
         
         self.editViewController = (WorkoutEditViewController *)segue.destinationViewController;
+        [self.editViewController shouldShowDateButton:NO];
         
 //        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 //        

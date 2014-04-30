@@ -7,6 +7,7 @@
 //
 
 #import "WorkoutEditViewController.h"
+#import "DateEditViewController.h"
 
 @interface WorkoutEditViewController ()
 
@@ -47,6 +48,11 @@
 
 - (void)initializeFields
 {
+    if (shouldShowDateButton == YES) {
+        self.dateButton.enabled = YES;
+        self.dateButton.hidden = NO;
+    }
+    
     self.minutesPicker.tag = 1;
     self.secondsPicker.tag = 2;
     
@@ -99,7 +105,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+- (void)shouldShowDateButton:(BOOL)yesOrNo
+{
+    shouldShowDateButton = yesOrNo;
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -107,8 +117,12 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"showDateView"]) {
+        DateEditViewController *vc = [segue destinationViewController];
+        vc.workout = self.workoutTemplate;
+    }
 }
-*/
 
 - (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -156,6 +170,10 @@
 
 - (IBAction)weightStepperChanged:(id)sender {
     self.weightLabel.text = [[NSNumber numberWithDouble:self.weightStepper.value] stringValue];
+}
+
+- (IBAction)dateButtonClicked:(id)sender {
+    
 }
 
 - (IBAction)done:(id)sender {

@@ -35,7 +35,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     //    self.navigationController.navigationBar.topItem.title = _testObject.description;
     //    self.navigationController.navigationItem.title = _testObject.description;
@@ -96,24 +96,24 @@
     return cell;
 }
 
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return NO;
- }
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return NO;
+}
 
 // Override to support editing the table view.
 /*
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-}
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
  */
 
 /*
@@ -141,9 +141,11 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"workoutDetail"]) {
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    WorkoutEntryTemplate *selectedItem = [self.workoutEntryTemplates objectAtIndex:indexPath.row];
-    ((WorkoutDetailViewController *)segue.destinationViewController).detailObject = selectedItem;
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        WorkoutEntryTemplate *selectedItem = [self.workoutEntryTemplates objectAtIndex:indexPath.row];
+        WorkoutDetailViewController *vc = segue.destinationViewController;
+        vc.detailObject = selectedItem;
+        [vc shouldShowDateTitleAndLabel:NO];
     } else if ([segue.identifier isEqualToString:@"EditWorkoutPlan"]) {
         WorkoutPlanEditViewController *vc = ((WorkoutPlanEditViewController *)segue.destinationViewController);
         vc.workoutPlan = self.workoutPlan;
@@ -156,22 +158,22 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
-//    if (self.addWorkoutButton.isHidden) {
-//        [UIView transitionWithView:self.addWorkoutButton
-//                          duration:0.4
-//                           options:UIViewAnimationOptionTransitionCrossDissolve
-//                        animations:NULL
-//                        completion:NULL];
-//        [self.addWorkoutButton setHidden:NO];
-//    }
-//    else {
-//        [UIView transitionWithView:self.addWorkoutButton
-//                          duration:0.4
-//                           options:UIViewAnimationOptionTransitionCrossDissolve
-//                        animations:NULL
-//                        completion:NULL];
-//        [self.addWorkoutButton setHidden:YES];
-//    }
+    //    if (self.addWorkoutButton.isHidden) {
+    //        [UIView transitionWithView:self.addWorkoutButton
+    //                          duration:0.4
+    //                           options:UIViewAnimationOptionTransitionCrossDissolve
+    //                        animations:NULL
+    //                        completion:NULL];
+    //        [self.addWorkoutButton setHidden:NO];
+    //    }
+    //    else {
+    //        [UIView transitionWithView:self.addWorkoutButton
+    //                          duration:0.4
+    //                           options:UIViewAnimationOptionTransitionCrossDissolve
+    //                        animations:NULL
+    //                        completion:NULL];
+    //        [self.addWorkoutButton setHidden:YES];
+    //    }
 }
 
 - (IBAction)editClicked:(id)sender {
@@ -183,7 +185,7 @@
     WorkoutEntryTemplate *newWorkoutEntryTemplate = [[WorkoutEntryTemplate alloc] init];
     newWorkoutEntryTemplate.name = @"Hello";
     
-//    WorkoutEntryTemplate *newWorkoutEntryTemplate = [WorkoutEntryTemplate createNewWorkoutEntryTemplate];
+    //    WorkoutEntryTemplate *newWorkoutEntryTemplate = [WorkoutEntryTemplate createNewWorkoutEntryTemplate];
     
     [self.workoutPlan.workoutEntryTemplates addObject:newWorkoutEntryTemplate];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.workoutPlan.workoutEntryTemplates.count - 1 inSection:0];

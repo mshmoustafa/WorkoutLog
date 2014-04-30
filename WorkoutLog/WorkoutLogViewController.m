@@ -7,6 +7,7 @@
 //
 
 #import "WorkoutLogViewController.h"
+#import "WorkoutDetailViewController.h"
 #import "WorkoutLogStore.h"
 #import "WorkoutsOnDate.h"
 
@@ -35,6 +36,14 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
+    if (!self.workoutLogEntries) {
+        self.workoutLogEntries = [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     if (!self.workoutLogEntries) {
         self.workoutLogEntries = [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
     }
@@ -149,6 +158,19 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    WorkoutsOnDate *workouts = [self.workoutLogEntries objectAtIndex:indexPath.section];
+    WorkoutEntry *workout = [workouts.workoutEntries objectAtIndex:indexPath.row];
+    
+    WorkoutDetailViewController *vc = [segue destinationViewController];
+    
+    vc.detailObject = workout;
+    [vc shouldShowDateTitleAndLabel:YES];
+    
+    [vc setDismissBlock:^{
+        self.workoutLogEntries = [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
+        [[self tableView] reloadData];
+    }];
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }

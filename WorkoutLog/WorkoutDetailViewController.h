@@ -7,12 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WorkoutEntryTemplate.h"
+#import "WorkoutEntry.h"
 
 @interface WorkoutDetailViewController : UIViewController
+{
+    BOOL shouldShowDateTitleAndLabel;
+}
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
-@property (strong, nonatomic) WorkoutEntryTemplate *detailObject;
+
+@property (nonatomic, copy) void (^dismissBlock)(void);
+
+//Changed this property from WorkoutEntryTemplate to WorkoutEntry
+//so that this view controller can accept both templates and entries.
+@property (strong, nonatomic) WorkoutEntry *detailObject;
+
 @property (weak, nonatomic) IBOutlet UILabel *planName;
 @property (weak, nonatomic) IBOutlet UILabel *repsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *setsLabel;
@@ -20,8 +29,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *minutesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondsLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *dateTitle;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 
+- (void)shouldShowDateTitleAndLabel:(BOOL)yesOrNo;
 
 - (IBAction)done:(id)sender;
 - (IBAction)save:(id)sender;
