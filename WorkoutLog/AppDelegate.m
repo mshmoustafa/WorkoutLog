@@ -36,7 +36,7 @@
 //    [self.window setRootViewController:tabViewController];
     
 //    [[WorkoutLogStore sharedStore] all]
-    [[WorkoutLogStore sharedStore] loadData];
+    [WorkoutLogStore sharedStore];
     [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
     
     return YES;

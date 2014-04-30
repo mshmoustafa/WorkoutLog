@@ -38,6 +38,22 @@
         workoutPlans = [[NSMutableArray alloc] init];
         workoutEntryTemplates = [[NSMutableArray alloc] init];
         workoutEntries = [[NSMutableArray alloc] init];
+        
+        NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
+        
+        NSString *file = [documentPath stringByAppendingString:@"/plans.archive"];
+        
+        workoutPlans = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+        
+        file = [documentPath stringByAppendingString:@"/templates.archive"];
+        
+        workoutEntryTemplates = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+        
+        file = [documentPath stringByAppendingString:@"/entries.archive"];
+        
+        workoutEntries = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+        
 //        [self dummyInit];
         NSLog(@"%@", workoutPlans.description);
         NSLog(@"%@", workoutEntryTemplates.description);
