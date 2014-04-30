@@ -14,30 +14,27 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithCoder:(NSCoder *)decoder
-{
-    self = [super init];
-    if (self) {
-        workoutPlans = [decoder decodeObjectForKey:@"workoutPlans"];
-        workoutEntryTemplates = [decoder decodeObjectForKey:@"workoutEntryTemplates"];
-        workoutEntries = [decoder decodeObjectForKey:@"workoutEntries"];
-    }
-    return self;
-}
+//- (instancetype)initWithCoder:(NSCoder *)decoder
+//{
+//    self = [super init];
+//    if (self) {
+//        workoutPlans = [decoder decodeObjectForKey:@"workoutPlans"];
+//        workoutEntryTemplates = [decoder decodeObjectForKey:@"workoutEntryTemplates"];
+//        workoutEntries = [decoder decodeObjectForKey:@"workoutEntries"];
+//    }
+//    return self;
+//}
 
-- (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:workoutPlans forKey:@"workoutPlans"];
-    [encoder encodeObject:workoutEntryTemplates forKey:@"workoutEntryTemplates"];
-    [encoder encodeObject:workoutEntries forKey:@"workoutEntries"];
-}
+//- (void)encodeWithCoder:(NSCoder *)encoder {
+//    [encoder encodeObject:workoutPlans forKey:@"workoutPlans"];
+//    [encoder encodeObject:workoutEntryTemplates forKey:@"workoutEntryTemplates"];
+//    [encoder encodeObject:workoutEntries forKey:@"workoutEntries"];
+//}
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        workoutPlans = [[NSMutableArray alloc] init];
-        workoutEntryTemplates = [[NSMutableArray alloc] init];
-        workoutEntries = [[NSMutableArray alloc] init];
         
         NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
@@ -54,7 +51,16 @@
         
         workoutEntries = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
         
-//        [self dummyInit];
+        if (!workoutPlans) {
+            workoutPlans = [[NSMutableArray alloc] init];
+        }
+        if (!workoutEntryTemplates) {
+            workoutEntryTemplates = [[NSMutableArray alloc] init];
+        }
+        if (!workoutEntries) {
+            workoutEntries = [[NSMutableArray alloc] init];
+        }
+        //        [self dummyInit];
         NSLog(@"%@", workoutPlans.description);
         NSLog(@"%@", workoutEntryTemplates.description);
         NSLog(@"%@", workoutEntries.description);
@@ -95,12 +101,12 @@
         entry.date = [NSDate dateWithTimeInterval:(86400 * i) sinceDate:todayMidnight];
         WorkoutEntry *entry1 = [((WorkoutEntryTemplate *)[workoutEntryTemplates lastObject]) makeWorkoutEntryFromTemplate];
         entry1.date = [NSDate dateWithTimeInterval:(86400 * i) sinceDate:todayMidnight];
-//        NSLog(@"Workout entry dates: %@ - %@", entry.date, entry1.date);
+        //        NSLog(@"Workout entry dates: %@ - %@", entry.date, entry1.date);
         [workoutEntries addObject:entry];
         [workoutEntries addObject:entry1];
     }
     
-//    [self todayWorkoutEntryTemplates];
+    //    [self todayWorkoutEntryTemplates];
     
 }
 
@@ -172,7 +178,7 @@
     NSCalendar *cal = [NSCalendar currentCalendar];
     
     NSDateComponents *components = [cal components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-//    NSLog(@"Today is: %d", components.weekday);
+    //    NSLog(@"Today is: %d", components.weekday);
     
     Day *today = [Day getDayByNumber:[NSNumber numberWithInt:components.weekday]];
     
@@ -260,7 +266,7 @@
     
     NSLog(documentPath);
     
-//    return [NSURL fileURLWithPath:documentPath];
+    //    return [NSURL fileURLWithPath:documentPath];
     return documentPath;
 }
 
