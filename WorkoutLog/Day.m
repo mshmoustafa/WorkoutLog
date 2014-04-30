@@ -12,13 +12,35 @@ NSArray *daysOfWeek;
 
 @interface Day ()
 
-+ (void)initializeDaysOfWeek;
+//+ (void)initializeDaysOfWeek;
 
 @end
 
 @implementation Day
 
+- (instancetype)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if (self) {
+        self.dayName = [decoder decodeObjectForKey:@"dayName"];
+        self.shortDay = [decoder decodeObjectForKey:@"shortDay"];
+        self.dayNumber = [decoder decodeObjectForKey:@"dayNumber"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:self.dayName forKey:@"dayName"];
+    [encoder encodeObject:self.shortDay forKey:@"shortDay"];
+    [encoder encodeObject:self.dayNumber forKey:@"dayNumber"];
+}
+
 + (void)initializeDaysOfWeek
+{
+    
+}
+
++ (Day *)getDay:(NSString *)dayString
 {
     static BOOL initialized = NO;
     if (initialized == NO) {
@@ -56,11 +78,6 @@ NSArray *daysOfWeek;
         
         initialized = YES;
     }
-}
-
-+ (Day *)getDay:(NSString *)dayString
-{
-    [Day initializeDaysOfWeek];
     
     for (Day *day in daysOfWeek) {
         if ([dayString isEqualToString:day.dayName] || [dayString isEqualToString:day.shortDay]) {
@@ -102,6 +119,9 @@ NSArray *daysOfWeek;
 
 + (Day *)getDayByNumber:(NSNumber *)number
 {
+    //only for initialization of day array
+    [Day getDay:nil];
+    
     for (Day *day in daysOfWeek) {
         if ([day.dayNumber isEqualToNumber:number]) {
             return day;

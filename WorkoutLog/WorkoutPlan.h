@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WorkoutPlan : NSObject
+@interface WorkoutPlan : NSObject <NSCoding>
 
 @property (strong, nonatomic) NSNumber *UID;
 //name of the plan

@@ -9,10 +9,10 @@
 #import "WorkoutEntry.h"
 
 //these are only ints, which can't be put in nsarray
-typedef enum {MON, TUE, WED, THU, FRI, SAT, SUN} DaysOfWeek;
-DaysOfWeek dow;
+//typedef enum {MON, TUE, WED, THU, FRI, SAT, SUN} DaysOfWeek;
+//DaysOfWeek dow;
 
-@interface WorkoutEntryTemplate : WorkoutEntry
+@interface WorkoutEntryTemplate : WorkoutEntry <NSCoding>
 
 @property (strong, nonatomic) NSMutableOrderedSet *days;
 

@@ -13,6 +13,25 @@
 
 @synthesize name = _name;
 
+- (instancetype)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if (self) {
+        self.UID = [decoder decodeObjectForKey:@"UID"];
+        self.name = [decoder decodeObjectForKey:@"name"];
+        self.days = [decoder decodeObjectForKey:@"days"];
+        self.workoutEntryTemplates = [decoder decodeObjectForKey:@"workoutEntryTemplates"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:self.UID forKey:@"UID"];
+    [encoder encodeObject:self.name forKey:@"name"];
+    [encoder encodeObject:self.days forKey:@"days"];
+    [encoder encodeObject:self.workoutEntryTemplates forKey:@"workoutEntryTemplates"];
+}
+
 - (id)init
 {
     self = [super init];

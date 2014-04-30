@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WorkoutEntry : NSObject
+@interface WorkoutEntry : NSObject <NSCoding>
 
 @property (strong, nonatomic) NSNumber *UID;
 @property (strong, nonatomic) NSString *name;

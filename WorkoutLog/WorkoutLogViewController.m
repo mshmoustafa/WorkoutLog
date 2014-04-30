@@ -47,11 +47,14 @@
     if (!self.workoutLogEntries) {
         self.workoutLogEntries = [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
     }
+    self.workoutLogEntries = [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self.tableView reloadData];
     return;
 }
 
@@ -122,19 +125,23 @@
 */
 
 // Override to support editing the table view.
-/*
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         WorkoutsOnDate *workouts = [self.workoutLogEntries objectAtIndex:indexPath.section];
+        WorkoutEntry *workout = [workouts.workoutEntries objectAtIndex:indexPath.row];
         
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [[[WorkoutLogStore sharedStore] allWorkoutEntries] removeObject:workout];
+        
+        self.workoutLogEntries = [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
+        [tableView reloadData];
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
- */
 
 
 /*

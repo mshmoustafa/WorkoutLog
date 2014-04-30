@@ -36,7 +36,7 @@
 //    [self.window setRootViewController:tabViewController];
     
 //    [[WorkoutLogStore sharedStore] all]
-    [WorkoutLogStore sharedStore];
+    [[WorkoutLogStore sharedStore] loadData];
     [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
     
     return YES;
@@ -50,7 +50,16 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    NSLog(@"entered background");
+    [[WorkoutLogStore sharedStore] saveData];
+//    BOOL success = [WorkoutLogStore saveData];
+//    
+//    if (success) {
+//        NSLog(@"all saved");
+//    } else {
+//        NSLog(@"error saving");
+//    }
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 

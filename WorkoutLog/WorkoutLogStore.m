@@ -14,6 +14,23 @@
 
 #pragma mark - Initialization
 
+- (instancetype)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if (self) {
+        workoutPlans = [decoder decodeObjectForKey:@"workoutPlans"];
+        workoutEntryTemplates = [decoder decodeObjectForKey:@"workoutEntryTemplates"];
+        workoutEntries = [decoder decodeObjectForKey:@"workoutEntries"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:workoutPlans forKey:@"workoutPlans"];
+    [encoder encodeObject:workoutEntryTemplates forKey:@"workoutEntryTemplates"];
+    [encoder encodeObject:workoutEntries forKey:@"workoutEntries"];
+}
+
 - (id)init
 {
     self = [super init];
@@ -21,7 +38,7 @@
         workoutPlans = [[NSMutableArray alloc] init];
         workoutEntryTemplates = [[NSMutableArray alloc] init];
         workoutEntries = [[NSMutableArray alloc] init];
-        [self dummyInit];
+//        [self dummyInit];
         NSLog(@"%@", workoutPlans.description);
         NSLog(@"%@", workoutEntryTemplates.description);
         NSLog(@"%@", workoutEntries.description);
@@ -33,19 +50,20 @@
 {
     WorkoutPlan *plan = [[WorkoutPlan alloc] init];
     plan.name = @"Workout Plan 1";
-    Day *day1 = [Day getDay:@"Monday"];
+    Day *day1 = [Day getDay:@"Wednesday"];
     plan.days = [NSMutableOrderedSet orderedSetWithArray: @[day1]];
     
     NSMutableArray *temp = [[NSMutableArray alloc] init];
     for (int i = 0; i < 2; i++) {
         WorkoutEntryTemplate *workout = [[WorkoutEntryTemplate alloc] init];
-        workout.name = [NSString stringWithFormat:@"%@%d", @"Workout", i];
+        [temp addObject:workout];
+        workout.name = [NSString stringWithFormat:@"%@%d", @"Workout ", i];
         workout.reps = 5;
         workout.sets = 6;
         workout.weight = 30;
         workout.days = [plan.days mutableCopy];
         workout.plan = plan.name;
-        [temp addObject:workout];
+        
     }
     
     plan.workoutEntryTemplates = temp;
@@ -66,7 +84,7 @@
         [workoutEntries addObject:entry1];
     }
     
-    [self todayWorkoutEntryTemplates];
+//    [self todayWorkoutEntryTemplates];
     
 }
 
@@ -144,7 +162,7 @@
     
     for (WorkoutPlan *plan in [[WorkoutLogStore sharedStore] allWorkoutPlans]) {
         for (Day *day in plan.days) {
-            if ([day isEqual:today]) {
+            if ([day.dayName isEqualToString:today.dayName]) {
                 [todaysPlans addObject:plan];
             }
         }
@@ -174,5 +192,64 @@
     date = [calendar dateFromComponents:Midnight];
     return date;
 }
+
+- (void)loadData
+{
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
+    
+    NSString *file = [documentPath stringByAppendingString:@"/plans.archive"];
+    
+    [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+    
+    file = [documentPath stringByAppendingString:@"/templates.archive"];
+    
+    [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+    
+    file = [documentPath stringByAppendingString:@"/entries.archive"];
+    
+    [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+}
+
+- (void)saveData
+{
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
+    
+    NSString *file = [documentPath stringByAppendingString:@"/plans.archive"];
+    
+    [NSKeyedArchiver archiveRootObject:workoutPlans toFile:file];
+    
+    file = [documentPath stringByAppendingString:@"/templates.archive"];
+    
+    [NSKeyedArchiver archiveRootObject:workoutEntryTemplates toFile:file];
+    
+    file = [documentPath stringByAppendingString:@"/entries.archive"];
+    
+    [NSKeyedArchiver archiveRootObject:workoutEntries toFile:file];
+}
+
++ (NSString *)applicationDocumentsDirectory
+{
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
+    
+    [documentPath appendString:@"/workoutlogstore.archive"];
+    
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:documentPath];
+    
+    if (!fileExists) {
+        //do nothing
+    }
+    
+    NSLog(documentPath);
+    
+//    return [NSURL fileURLWithPath:documentPath];
+    return documentPath;
+}
+
+# pragma mark - NSCoding
+
+
 
 @end

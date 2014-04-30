@@ -20,6 +20,35 @@
 
 #pragma mark - Initialization
 
+- (instancetype)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if (self) {
+        self.UID = [decoder decodeObjectForKey:@"UID"];
+        self.name = [decoder decodeObjectForKey:@"name"];
+        self.date = [decoder decodeObjectForKey:@"date"];
+        self.plan = [decoder decodeObjectForKey:@"plan"];
+        self.reps = [decoder decodeIntegerForKey:@"reps"];
+        self.sets = [decoder decodeIntegerForKey:@"sets"];
+        self.weight = [decoder decodeIntegerForKey:@"weight"];
+        self.min = [decoder decodeIntegerForKey:@"min"];
+        self.sec = [decoder decodeIntegerForKey:@"sec"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:self.UID forKey:@"UID"];
+    [encoder encodeObject:self.name forKey:@"name"];
+    [encoder encodeObject:self.date forKey:@"date"];
+    [encoder encodeObject:self.plan forKey:@"plan"];
+    [encoder encodeInteger:self.reps forKey:@"reps"];
+    [encoder encodeInteger:self.sets forKey:@"sets"];
+    [encoder encodeInteger:self.weight forKey:@"weight"];
+    [encoder encodeInteger:self.min forKey:@"min"];
+    [encoder encodeInteger:self.sec forKey:@"sec"];
+}
+
 - (id)init
 {
     self = [super init];
@@ -27,7 +56,7 @@
     //set defaults if no params are given
     //I shouldn't allow any workouts in the same plan to have the same name b/c I'll be looking up workouts based on name.  Workouts in different plans can have the same name.
     [self setUID:[NSNumber numberWithInt:arc4random()]];
-    [self setName:nil];
+    [self setName:@"Workout"];
     [self setDate:[NSDate date]]; //this should be the current date
     [self setReps:0];
     [self setSets:0];

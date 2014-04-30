@@ -30,12 +30,12 @@
 {
     [super viewDidLoad];
     
-    if (!self.workoutsToday) {
-        self.workoutsToday = [[NSMutableArray alloc] init];
+    if (!self.completedWorkouts) {
+        self.completedWorkouts = [[NSMutableDictionary alloc] init];
     }
-    for (int i = 0; i < 5; i++) {
-        [self.workoutsToday addObject:[NSNumber numberWithInt:i]];
-    }
+//    for (int i = 0; i < 5; i++) {
+//        [self.workoutsToday addObject:[NSNumber numberWithInt:i]];
+//    }
     
     //    UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
     
@@ -45,6 +45,12 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.workoutsToday = [[WorkoutLogStore sharedStore] todayWorkoutEntryTemplates];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,12 +81,18 @@
     
     TodayWorkoutTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.workoutNameLabel.text = [[NSDate date] description];
+    WorkoutEntryTemplate *workout = [self.workoutsToday objectAtIndex:indexPath.row];
     
-    cell.workoutInfoLabel.text = @"Do lots of reps!";
+    cell.workoutNameLabel.text = [workout description];
+    
+    NSMutableString *detailText = [NSMutableString stringWithFormat:@"%d Reps, %d Sets, %d Weight, %d:%d", workout.reps, workout.sets, workout.weight, workout.min, workout.sec];
+    
+    cell.workoutInfoLabel.text = detailText;
     
     NSNumber *key = [NSNumber numberWithInt:indexPath.row];
-    if ([[self.completedWorkouts allKeys] containsObject:key]) {
+    NSArray *allKeys = [self.completedWorkouts allKeys];
+    
+    if ([[self.completedWorkouts allKeys] containsObject:[key stringValue]]) {
         
         cell.backgroundColor = [UIColor yellowColor];
         
@@ -103,12 +115,15 @@
     WorkoutEntry *workout = [self.completedWorkouts valueForKey:[key stringValue]];
     if (workout) {
         [self.completedWorkouts removeObjectForKey:[key stringValue]];
+        WorkoutLogStore *store = [WorkoutLogStore sharedStore];
         [[[WorkoutLogStore sharedStore] allWorkoutEntries] removeObject:workout];
         //unstrikethrough text
     } else {
         WorkoutEntryTemplate *template = [self.workoutsToday objectAtIndex:indexPath.row];
         if (template) {
             workout = [template makeWorkoutEntryFromTemplate];
+            workout.date = [WorkoutLogStore dateMidnight:workout.date];
+            WorkoutLogStore *store = [WorkoutLogStore sharedStore];
             [[[WorkoutLogStore sharedStore] allWorkoutEntries] addObject:workout];
             [self.completedWorkouts setValue:workout forKey:[key stringValue]];
         }

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Day : NSObject
+@interface Day : NSObject <NSCoding>
 {
 }
 

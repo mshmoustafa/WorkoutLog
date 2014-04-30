@@ -14,7 +14,7 @@
 /**
  Contains arrays of all workout plans, templates, and entries, as well as a method to organize all workout entries by date.
  */
-@interface WorkoutLogStore : NSObject
+@interface WorkoutLogStore : NSObject <NSCoding>
 {
 #pragma mark - Instance Variables
     NSMutableArray *workoutPlans;
@@ -42,5 +42,9 @@
  @endcode
  */
 + (NSDate *)dateMidnight:(NSDate *)date;
+
++ (NSString *)applicationDocumentsDirectory;
+- (void)saveData;
+- (void)loadData;
 
 @end
