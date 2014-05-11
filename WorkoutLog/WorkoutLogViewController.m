@@ -171,7 +171,7 @@
     
     WorkoutDetailViewController *vc = [segue destinationViewController];
     
-    vc.detailObject = workout;
+    vc.workoutEntry = workout;
     [vc shouldShowDateTitleAndLabel:YES];
     
     [vc setDismissBlock:^{

@@ -27,6 +27,15 @@
     return self;
 }
 
+- (void)fillDaysLabel
+{
+    self.daysLabel.text = @"";
+    for (Day *day in self.workoutPlan.days) {
+        self.daysLabel.text = [self.daysLabel.text stringByAppendingString:day.shortDay];
+        self.daysLabel.text = [self.daysLabel.text stringByAppendingString:@" "];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -44,21 +53,24 @@
         _workoutEntryTemplates = self.workoutPlan.workoutEntryTemplates;
     }
     
-    self.daysLabel.text = @"";
-    for (Day *day in self.workoutPlan.days) {
-        self.daysLabel.text = [self.daysLabel.text stringByAppendingString:day.shortDay];
-        self.daysLabel.text = [self.daysLabel.text stringByAppendingString:@" "];
-    }
     //    for (int i = 0; i < 3; i++) {
     //        [self.workoutEntries addObject:[NSNumber numberWithInt:i]];
     //    }
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
+    [super viewDidAppear:animated];
+    
     [self.tableView reloadData];
+    [self fillDaysLabel];
 }
+
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:YES];
+//    [self.tableView reloadData];
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -143,8 +155,8 @@
     if ([segue.identifier isEqualToString:@"workoutDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         WorkoutEntryTemplate *selectedItem = [self.workoutEntryTemplates objectAtIndex:indexPath.row];
-        WorkoutDetailViewController *vc = segue.destinationViewController;
-        vc.detailObject = selectedItem;
+        WorkoutDetailViewController *vc = (WorkoutDetailViewController *)segue.destinationViewController;
+        vc.workoutEntry = selectedItem;
         [vc shouldShowDateTitleAndLabel:NO];
     } else if ([segue.identifier isEqualToString:@"EditWorkoutPlan"]) {
         WorkoutPlanEditViewController *vc = ((WorkoutPlanEditViewController *)segue.destinationViewController);

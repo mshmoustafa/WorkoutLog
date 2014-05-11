@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WorkoutEntry.h"
 
-@interface WorkoutDetailViewController : UIViewController
+@interface WorkoutDetailViewController : UITableViewController
 {
     BOOL shouldShowDateTitleAndLabel;
 }
@@ -20,7 +20,7 @@
 
 //Changed this property from WorkoutEntryTemplate to WorkoutEntry
 //so that this view controller can accept both templates and entries.
-@property (strong, nonatomic) WorkoutEntry *detailObject;
+@property (strong, nonatomic) WorkoutEntry *workoutEntry;
 
 @property (weak, nonatomic) IBOutlet UILabel *planName;
 @property (weak, nonatomic) IBOutlet UILabel *repsLabel;

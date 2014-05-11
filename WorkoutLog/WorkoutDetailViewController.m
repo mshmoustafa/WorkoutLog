@@ -24,29 +24,39 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)initializeFields
 {
-    [super viewDidLoad];
-    
     if (shouldShowDateTitleAndLabel) {
         self.dateTitle.hidden = NO;
         self.dateLabel.hidden = NO;
     }
     
-    self.navBar.title = [_detailObject name];
-    self.planName.text = self.detailObject.plan;
+    self.navBar.title = [_workoutEntry name];
+    self.planName.text = self.workoutEntry.plan;
 #warning *aesthetic: don't show fields that aren't set
-    self.repsLabel.text = [[NSNumber numberWithLong:self.detailObject.reps] stringValue];
-    self.setsLabel.text = [[NSNumber numberWithLong:self.detailObject.sets] stringValue];
-    self.weightLabel.text = [[NSNumber numberWithLong:self.detailObject.weight] stringValue];
-    self.minutesLabel.text = [[NSNumber numberWithLong:self.detailObject.min] stringValue];
-    self.secondsLabel.text = [[NSNumber numberWithLong:self.detailObject.sec] stringValue];
-
+    self.repsLabel.text = [[NSNumber numberWithLong:self.workoutEntry.reps] stringValue];
+    self.setsLabel.text = [[NSNumber numberWithLong:self.workoutEntry.sets] stringValue];
+    self.weightLabel.text = [[NSNumber numberWithLong:self.workoutEntry.weight] stringValue];
+    self.minutesLabel.text = [[NSNumber numberWithLong:self.workoutEntry.min] stringValue];
+    self.secondsLabel.text = [[NSNumber numberWithLong:self.workoutEntry.sec] stringValue];
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterNoStyle];
     
-    self.dateLabel.text = [formatter stringFromDate:self.detailObject.date];
+    self.dateLabel.text = [formatter stringFromDate:self.workoutEntry.date];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self initializeFields];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,7 +74,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"EditWorkoutEntryTemplate"]) {
         UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
-        ((WorkoutEditViewController *)[nav.childViewControllers firstObject]).workoutTemplate = self.detailObject;
+        ((WorkoutEditViewController *)[nav.childViewControllers firstObject]).workoutTemplate = self.workoutEntry;
         
         [((WorkoutEditViewController *)[nav.childViewControllers firstObject]) shouldShowDateButton:shouldShowDateTitleAndLabel];
     }
@@ -76,6 +86,7 @@
 }
 
 - (IBAction)done:(id)sender {
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:self.dismissBlock];
+//    [[self presentingViewController] dismissViewControllerAnimated:YES completion:self.dismissBlock];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

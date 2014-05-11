@@ -45,6 +45,12 @@
 		F0D7C11018F2168A005DF85D /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = F0D7C10F18F2168A005DF85D /* GraphView.m */; };
 		F0DF924F18C2837500E8036F /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0DF924E18C2837500E8036F /* NavigationViewController.m */; };
 		F0DF925818C55CD300E8036F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0DF925618C55CD300E8036F /* ViewController.m */; };
+		F0F3A7F9191F39F400FC1BD4 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F3A7F3191F39F400FC1BD4 /* calendar.png */; };
+		F0F3A7FA191F39F400FC1BD4 /* diary.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F3A7F4191F39F400FC1BD4 /* diary.png */; };
+		F0F3A7FB191F39F400FC1BD4 /* dumbbell.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F3A7F5191F39F400FC1BD4 /* dumbbell.png */; };
+		F0F3A7FC191F39F400FC1BD4 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F3A7F6191F39F400FC1BD4 /* gear.png */; };
+		F0F3A7FD191F39F400FC1BD4 /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F3A7F7191F39F400FC1BD4 /* sun.png */; };
+		F0F3A7FE191F39F400FC1BD4 /* text-list.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F3A7F8191F39F400FC1BD4 /* text-list.png */; };
 		F0F9FF9B18E664F6009225EB /* WorkoutPlansController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F9FF9A18E664F6009225EB /* WorkoutPlansController.m */; };
 		F0F9FF9E18E66A2E009225EB /* WorkoutPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F9FF9D18E66A2E009225EB /* WorkoutPlanViewController.m */; };
 		F0F9FFA418E6768D009225EB /* WorkoutDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F9FFA318E6768D009225EB /* WorkoutDetailViewController.m */; };
@@ -122,6 +128,12 @@
 		F0DF924E18C2837500E8036F /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		F0DF925518C55CD300E8036F /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../ViewController.h; sourceTree = "<group>"; };
 		F0DF925618C55CD300E8036F /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ../ViewController.m; sourceTree = "<group>"; };
+		F0F3A7F3191F39F400FC1BD4 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
+		F0F3A7F4191F39F400FC1BD4 /* diary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diary.png; sourceTree = "<group>"; };
+		F0F3A7F5191F39F400FC1BD4 /* dumbbell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dumbbell.png; sourceTree = "<group>"; };
+		F0F3A7F6191F39F400FC1BD4 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		F0F3A7F7191F39F400FC1BD4 /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sun.png; sourceTree = "<group>"; };
+		F0F3A7F8191F39F400FC1BD4 /* text-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text-list.png"; sourceTree = "<group>"; };
 		F0F9FF9918E664F6009225EB /* WorkoutPlansController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutPlansController.h; sourceTree = "<group>"; };
 		F0F9FF9A18E664F6009225EB /* WorkoutPlansController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutPlansController.m; sourceTree = "<group>"; };
 		F0F9FF9C18E66A2E009225EB /* WorkoutPlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutPlanViewController.h; sourceTree = "<group>"; };
@@ -286,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				F06CC52818E656A000E53769 /* Storyboard.storyboard */,
+				F0F3A7F2191F39F400FC1BD4 /* Tab Bar Images */,
 				F0D7C0CF18F21344005DF85D /* GraphTab */,
 				F0D7C0C818F1F862005DF85D /* TodayTab */,
 				F0D7C0C118F1E46C005DF85D /* WorkoutLogTab */,
@@ -345,6 +358,19 @@
 				F0D7C10F18F2168A005DF85D /* GraphView.m */,
 			);
 			name = GraphTab;
+			sourceTree = "<group>";
+		};
+		F0F3A7F2191F39F400FC1BD4 /* Tab Bar Images */ = {
+			isa = PBXGroup;
+			children = (
+				F0F3A7F3191F39F400FC1BD4 /* calendar.png */,
+				F0F3A7F4191F39F400FC1BD4 /* diary.png */,
+				F0F3A7F5191F39F400FC1BD4 /* dumbbell.png */,
+				F0F3A7F6191F39F400FC1BD4 /* gear.png */,
+				F0F3A7F7191F39F400FC1BD4 /* sun.png */,
+				F0F3A7F8191F39F400FC1BD4 /* text-list.png */,
+			);
+			path = "Tab Bar Images";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,12 +451,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0F3A7FD191F39F400FC1BD4 /* sun.png in Resources */,
 				F037F3A2191EC364003EA3DF /* README.md in Resources */,
+				F0F3A7F9191F39F400FC1BD4 /* calendar.png in Resources */,
+				F0F3A7FE191F39F400FC1BD4 /* text-list.png in Resources */,
 				F037F3A0191EC364003EA3DF /* Apache_License_2_0.txt in Resources */,
 				F037F3A4191EC364003EA3DF /* StaticDataTableViewController.podspec in Resources */,
+				F0F3A7FC191F39F400FC1BD4 /* gear.png in Resources */,
+				F0F3A7FB191F39F400FC1BD4 /* dumbbell.png in Resources */,
 				F04AA55718B7E7F50098554A /* InfoPlist.strings in Resources */,
 				F06CC52918E656A000E53769 /* Storyboard.storyboard in Resources */,
 				F037F3A1191EC364003EA3DF /* LICENSE.txt in Resources */,
+				F0F3A7FA191F39F400FC1BD4 /* diary.png in Resources */,
 				F04AA55F18B7E7F50098554A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

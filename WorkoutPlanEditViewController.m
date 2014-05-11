@@ -168,19 +168,26 @@
     if (button.backgroundColor == nil) {
         button.backgroundColor = [UIColor colorWithRed:0.91 green:0.94 blue:0.98 alpha:1.0];
         [self.selectedDayButtons addObject:[Day getDay:button.currentTitle]];
-        [self.selectedDayButtons sortUsingComparator:^(Day *day1, Day *day2) {
-            
-            if (day1.dayNumber > day2.dayNumber) {
-                return (NSComparisonResult)NSOrderedDescending;
-            }
-            
-            if (day1.dayNumber < day2.dayNumber) {
-                return (NSComparisonResult)NSOrderedAscending;
-            }
-            return (NSComparisonResult)NSOrderedSame;
-        }];
+//        [self.selectedDayButtons sortUsingComparator:^(Day *day1, Day *day2) {
+//            
+//            if (day1.dayNumber > day2.dayNumber) {
+//                return (NSComparisonResult)NSOrderedDescending;
+//            }
+//            
+//            if (day1.dayNumber < day2.dayNumber) {
+//                return (NSComparisonResult)NSOrderedAscending;
+//            }
+//            return (NSComparisonResult)NSOrderedSame;
+//        }];
     } else {
-        [self.selectedDayButtons removeObject:[Day getDay:button.currentTitle]];
+        NSLog(@"%@", button.currentTitle);
+        Day *dayToRemove = nil;
+        for (Day *day in self.selectedDayButtons) {
+            if ([day.shortDay isEqualToString:button.currentTitle]) {
+                dayToRemove = day;
+            }
+        }
+        [self.selectedDayButtons removeObject:dayToRemove];
         button.backgroundColor = nil;
     }
 }
@@ -195,17 +202,16 @@
     }
     [temp sortUsingComparator:^(Day *day1, Day *day2) {
         
-        if (day1.dayNumber > day2.dayNumber) {
+        if ([day1.dayNumber intValue] > [day2.dayNumber intValue]) {
             return (NSComparisonResult)NSOrderedDescending;
         }
         
-        if (day1.dayNumber < day2.dayNumber) {
+        if ([day1.dayNumber intValue] < [day2.dayNumber intValue]) {
             return (NSComparisonResult)NSOrderedAscending;
         }
         return (NSComparisonResult)NSOrderedSame;
     }];
     self.workoutPlan.days = temp;
-#warning For some reason, the presenting view controller doesn't refresh
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 
