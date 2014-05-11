@@ -81,26 +81,38 @@
     
     WorkoutEntryTemplate *workout = [self.workoutsToday objectAtIndex:indexPath.row];
     
-    cell.workoutNameLabel.text = [workout description];
-    
-    NSMutableString *detailText = [NSMutableString stringWithFormat:@"%d Reps, %d Sets, %d Weight, %d:%d", workout.reps, workout.sets, workout.weight, workout.min, workout.sec];
-    
-    cell.workoutInfoLabel.text = detailText;
-    
     NSNumber *key = [NSNumber numberWithInt:indexPath.row];
     NSArray *allKeys = [self.completedWorkouts allKeys];
     
+    NSMutableAttributedString *nameLabelText = [[NSMutableAttributedString alloc] initWithString:workout.description];
+    NSMutableAttributedString *detailText = [[NSMutableAttributedString alloc] initWithString:[NSMutableString stringWithFormat:@"%d Reps, %d Sets, %d Weight, %d:%d", workout.reps, workout.sets, workout.weight, workout.min, workout.sec]];
+    
     if ([[self.completedWorkouts allKeys] containsObject:[key stringValue]]) {
         
-        cell.backgroundColor = [UIColor yellowColor];
+        cell.backgroundColor = [UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:1.0];
+        
+        [nameLabelText addAttribute:NSStrikethroughStyleAttributeName
+                              value:@2
+                              range:NSMakeRange(0, [nameLabelText length])];
+        
+        [detailText addAttribute:NSStrikethroughStyleAttributeName
+                              value:@2
+                              range:NSMakeRange(0, [detailText length])];
         
         //        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"Your String here"];
         //        [attributeString addAttribute:NSStrikethroughStyleAttributeName
         //                                value:@2
         //                                range:NSMakeRange(0, [attributeString length])];
+        
     } else {
         cell.backgroundColor = [UIColor whiteColor];
     }
+    
+    cell.workoutNameLabel.attributedText = nameLabelText;
+    
+    
+    
+    cell.workoutInfoLabel.attributedText = detailText;
     
     cell.editButton.tag = indexPath.row;
     
