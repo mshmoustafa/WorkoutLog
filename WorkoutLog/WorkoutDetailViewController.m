@@ -36,11 +36,11 @@
     self.navBar.title = [_detailObject name];
     self.planName.text = self.detailObject.plan;
 #warning *aesthetic: don't show fields that aren't set
-    self.repsLabel.text = [[NSNumber numberWithInt:self.detailObject.reps] stringValue];
-    self.setsLabel.text = [[NSNumber numberWithInt:self.detailObject.sets] stringValue];
-    self.weightLabel.text = [[NSNumber numberWithInt:self.detailObject.weight] stringValue];
-    self.minutesLabel.text = [[NSNumber numberWithInt:self.detailObject.min] stringValue];
-    self.secondsLabel.text = [[NSNumber numberWithInt:self.detailObject.sec] stringValue];
+    self.repsLabel.text = [[NSNumber numberWithLong:self.detailObject.reps] stringValue];
+    self.setsLabel.text = [[NSNumber numberWithLong:self.detailObject.sets] stringValue];
+    self.weightLabel.text = [[NSNumber numberWithLong:self.detailObject.weight] stringValue];
+    self.minutesLabel.text = [[NSNumber numberWithLong:self.detailObject.min] stringValue];
+    self.secondsLabel.text = [[NSNumber numberWithLong:self.detailObject.sec] stringValue];
 
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -63,9 +63,10 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"EditWorkoutEntryTemplate"]) {
-        ((WorkoutEditViewController *)segue.destinationViewController).workoutTemplate = self.detailObject;
+        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
+        ((WorkoutEditViewController *)[nav.childViewControllers firstObject]).workoutTemplate = self.detailObject;
         
-        [((WorkoutEditViewController *)segue.destinationViewController) shouldShowDateButton:shouldShowDateTitleAndLabel];
+        [((WorkoutEditViewController *)[nav.childViewControllers firstObject]) shouldShowDateButton:shouldShowDateTitleAndLabel];
     }
 }
 
