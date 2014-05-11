@@ -48,10 +48,10 @@
 
 - (void)initializeFields
 {
-    if (shouldShowDateButton == YES) {
-        self.dateButton.enabled = YES;
-        self.dateButton.hidden = NO;
-    }
+//    if (shouldShowDateButton == YES) {
+//        self.dateButton.enabled = YES;
+//        self.dateButton.hidden = NO;
+//    }
     
     self.minutesPicker.tag = 1;
     self.secondsPicker.tag = 2;
@@ -69,6 +69,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     // Do any additional setup after loading the view.
     
 //    [self initializeFields];
@@ -109,6 +110,15 @@
 {
     shouldShowDateButton = yesOrNo;
 }
+
+
+
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//    
+//    return nil;
+//}
 
 #pragma mark - Navigation
 

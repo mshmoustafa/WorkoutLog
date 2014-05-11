@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StaticDataTableViewController/StaticDataTableViewController.h"
 #import "WorkoutEntryTemplate.h"
 
-@interface WorkoutEditViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface WorkoutEditViewController : StaticDataTableViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 {
     BOOL shouldShowDateButton;
 }

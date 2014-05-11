@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		F0164754190C815900BFAE95 /* WorkoutsOnDate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0164753190C815900BFAE95 /* WorkoutsOnDate.m */; };
+		F037F3A0191EC364003EA3DF /* Apache_License_2_0.txt in Resources */ = {isa = PBXBuildFile; fileRef = F037F387191EC363003EA3DF /* Apache_License_2_0.txt */; };
+		F037F3A1191EC364003EA3DF /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = F037F388191EC363003EA3DF /* LICENSE.txt */; };
+		F037F3A2191EC364003EA3DF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F037F389191EC363003EA3DF /* README.md */; };
+		F037F3A3191EC364003EA3DF /* StaticDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F037F38B191EC363003EA3DF /* StaticDataTableViewController.m */; };
+		F037F3A4191EC364003EA3DF /* StaticDataTableViewController.podspec in Resources */ = {isa = PBXBuildFile; fileRef = F037F38C191EC363003EA3DF /* StaticDataTableViewController.podspec */; };
 		F04AA54D18B7E7F50098554A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04AA54C18B7E7F50098554A /* Foundation.framework */; };
 		F04AA54F18B7E7F50098554A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04AA54E18B7E7F50098554A /* CoreGraphics.framework */; };
 		F04AA55118B7E7F50098554A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04AA55018B7E7F50098554A /* UIKit.framework */; };
@@ -58,6 +63,12 @@
 /* Begin PBXFileReference section */
 		F0164752190C815900BFAE95 /* WorkoutsOnDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutsOnDate.h; sourceTree = "<group>"; };
 		F0164753190C815900BFAE95 /* WorkoutsOnDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutsOnDate.m; sourceTree = "<group>"; };
+		F037F387191EC363003EA3DF /* Apache_License_2_0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Apache_License_2_0.txt; sourceTree = "<group>"; };
+		F037F388191EC363003EA3DF /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		F037F389191EC363003EA3DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		F037F38A191EC363003EA3DF /* StaticDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticDataTableViewController.h; sourceTree = "<group>"; };
+		F037F38B191EC363003EA3DF /* StaticDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticDataTableViewController.m; sourceTree = "<group>"; };
+		F037F38C191EC363003EA3DF /* StaticDataTableViewController.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StaticDataTableViewController.podspec; sourceTree = "<group>"; };
 		F04AA54918B7E7F50098554A /* WorkoutLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04AA54C18B7E7F50098554A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F04AA54E18B7E7F50098554A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -143,6 +154,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F037F386191EC363003EA3DF /* StaticDataTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F037F387191EC363003EA3DF /* Apache_License_2_0.txt */,
+				F037F388191EC363003EA3DF /* LICENSE.txt */,
+				F037F389191EC363003EA3DF /* README.md */,
+				F037F38A191EC363003EA3DF /* StaticDataTableViewController.h */,
+				F037F38B191EC363003EA3DF /* StaticDataTableViewController.m */,
+				F037F38C191EC363003EA3DF /* StaticDataTableViewController.podspec */,
+			);
+			path = StaticDataTableViewController;
+			sourceTree = "<group>";
+		};
 		F04AA54018B7E7F50098554A = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +215,7 @@
 		F04AA55318B7E7F50098554A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F037F386191EC363003EA3DF /* StaticDataTableViewController */,
 				F04AA55418B7E7F50098554A /* WorkoutLog-Info.plist */,
 				F04AA55518B7E7F50098554A /* InfoPlist.strings */,
 				F04AA55818B7E7F50098554A /* main.m */,
@@ -400,8 +425,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F037F3A2191EC364003EA3DF /* README.md in Resources */,
+				F037F3A0191EC364003EA3DF /* Apache_License_2_0.txt in Resources */,
+				F037F3A4191EC364003EA3DF /* StaticDataTableViewController.podspec in Resources */,
 				F04AA55718B7E7F50098554A /* InfoPlist.strings in Resources */,
 				F06CC52918E656A000E53769 /* Storyboard.storyboard in Resources */,
+				F037F3A1191EC364003EA3DF /* LICENSE.txt in Resources */,
 				F04AA55F18B7E7F50098554A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,6 +453,7 @@
 				F0164754190C815900BFAE95 /* WorkoutsOnDate.m in Sources */,
 				F0522BF6190ABF980013AA29 /* Day.m in Sources */,
 				F04AA55D18B7E7F50098554A /* AppDelegate.m in Sources */,
+				F037F3A3191EC364003EA3DF /* StaticDataTableViewController.m in Sources */,
 				F0D7C0C418F1E49B005DF85D /* WorkoutLogViewController.m in Sources */,
 				F0D7C0CB18F1F881005DF85D /* TodayTableViewController.m in Sources */,
 				F097EA211910986D00D0531F /* DateEditViewController.m in Sources */,

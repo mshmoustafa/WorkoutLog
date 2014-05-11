@@ -25,5 +25,6 @@
 - (IBAction)clickedDayButton:(id)sender;
 
 - (IBAction)save:(id)sender;
+- (IBAction)addWorkout:(id)sender;
 
 @end

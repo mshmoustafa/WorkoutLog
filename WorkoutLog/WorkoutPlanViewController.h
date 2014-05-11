@@ -21,6 +21,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *daysLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addWorkoutButton;
 
-- (IBAction)addWorkout:(id)sender;
-
 @end
