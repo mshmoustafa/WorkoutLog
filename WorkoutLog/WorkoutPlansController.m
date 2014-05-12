@@ -103,7 +103,10 @@
 //        indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
         NSLog(@"%ld, rows = %lu", indexPath.row, (unsigned long)_workoutPlans.count);
         // Delete the row from the data source
+        
         [[[WorkoutLogStore sharedStore] allWorkoutPlans] removeObjectAtIndex:indexPath.row];
+        [[WorkoutLogStore sharedStore] saveData];
+        
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -151,6 +154,9 @@
     }
     WorkoutPlan *newPlan = [WorkoutPlan createNewPlan];
     [_workoutPlans addObject:newPlan];
+    
+    [[WorkoutLogStore sharedStore] saveData];
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_workoutPlans.count - 1) inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }

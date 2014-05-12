@@ -89,7 +89,7 @@
     
     if ([[self.completedWorkouts allKeys] containsObject:[key stringValue]]) {
         
-        cell.backgroundColor = [UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:1.0];
+        cell.backgroundColor = [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1.0];
         
         [nameLabelText addAttribute:NSStrikethroughStyleAttributeName
                               value:@2
@@ -125,7 +125,9 @@
     WorkoutEntry *workout = [self.completedWorkouts valueForKey:[key stringValue]];
     if (workout) {
         [self.completedWorkouts removeObjectForKey:[key stringValue]];
+        
         WorkoutLogStore *store = [WorkoutLogStore sharedStore];
+        
         [[[WorkoutLogStore sharedStore] allWorkoutEntries] removeObject:workout];
         //unstrikethrough text
     } else {
@@ -133,13 +135,17 @@
         if (template) {
             workout = [template makeWorkoutEntryFromTemplate];
             workout.date = [WorkoutLogStore dateMidnight:workout.date];
+            
             WorkoutLogStore *store = [WorkoutLogStore sharedStore];
             [[[WorkoutLogStore sharedStore] allWorkoutEntries] addObject:workout];
+            
             [self.completedWorkouts setValue:workout forKey:[key stringValue]];
         }
 
         //strikethrough text
     }
+    
+    [[WorkoutLogStore sharedStore] saveData];
     
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     

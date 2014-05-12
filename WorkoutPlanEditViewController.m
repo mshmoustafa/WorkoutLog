@@ -10,6 +10,7 @@
 #import "workoutEditViewController.h"
 #import "WorkoutEntryTemplate.h"
 #import "Day.h"
+#import "WorkoutLogStore.h"
 
 @interface WorkoutPlanEditViewController ()
 
@@ -212,6 +213,9 @@
         return (NSComparisonResult)NSOrderedSame;
     }];
     self.workoutPlan.days = temp;
+    
+    [[WorkoutLogStore sharedStore] saveData];
+    
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 

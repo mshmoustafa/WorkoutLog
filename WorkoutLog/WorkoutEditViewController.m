@@ -9,6 +9,8 @@
 #import "WorkoutEditViewController.h"
 #import "DateEditViewController.h"
 
+#import "WorkoutLogStore.h"
+
 @interface WorkoutEditViewController ()
 
 @end
@@ -194,6 +196,8 @@
     self.workoutTemplate.min = self.selectedMinutes;
     self.workoutTemplate.sec = self.selectedSeconds;
     
+    [[WorkoutLogStore sharedStore] saveData];
+    
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -201,6 +205,12 @@
 {
     [self.view resignFirstResponder];
     [self.view endEditing:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

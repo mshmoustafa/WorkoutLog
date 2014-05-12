@@ -249,6 +249,8 @@
     file = [documentPath stringByAppendingString:@"/entries.archive"];
     
     [NSKeyedArchiver archiveRootObject:workoutEntries toFile:file];
+    
+    NSLog(@"saved data");
 }
 
 + (NSString *)applicationDocumentsDirectory
