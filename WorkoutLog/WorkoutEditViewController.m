@@ -60,11 +60,11 @@
     
     self.nameLabel.text = self.workoutTemplate.name;
     self.planLabel.text = self.workoutTemplate.plan;
-    self.repsLabel.text = [[NSNumber numberWithInt:self.workoutTemplate.reps] stringValue];
+    self.repsLabel.text = [[NSNumber numberWithLong:self.workoutTemplate.reps] stringValue];
     self.repsStepper.value = self.workoutTemplate.reps;
-    self.setsLabel.text = [[NSNumber numberWithInt:self.workoutTemplate.sets] stringValue];
+    self.setsLabel.text = [[NSNumber numberWithLong:self.workoutTemplate.sets] stringValue];
     self.setsStepper.value = self.workoutTemplate.sets;
-    self.weightLabel.text = [[NSNumber numberWithInt:self.workoutTemplate.weight] stringValue];
+    self.weightLabel.text = [[NSNumber numberWithLong:self.workoutTemplate.weight] stringValue];
     self.weightStepper.value = self.workoutTemplate.weight;
 }
 
@@ -91,13 +91,15 @@
     
     for (NSNumber *min in self.minutes) {
         if (self.workoutTemplate.min == [min unsignedIntegerValue]) {
-            NSLog(@"index of minute = %d", [self.minutes indexOfObject:min]);
+            NSLog(@"index of minute = %lu", (unsigned long)[self.minutes indexOfObject:min]);
             [self.minutesPicker selectRow:[self.minutes indexOfObject:min] inComponent:0 animated:YES];
+            self.selectedMinutes = [min unsignedIntegerValue];
         }
     }
     for (NSNumber *sec in self.seconds) {
         if (self.workoutTemplate.sec == [sec unsignedIntegerValue]) {
             [self.secondsPicker selectRow:[self.seconds indexOfObject:sec] inComponent:0 animated:YES];
+            self.selectedSeconds = [sec unsignedIntegerValue];
         }
     }
 }
@@ -136,12 +138,12 @@
 //    }
 }
 
-- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+- (long)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
 }
 
-- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+- (long)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     if (pickerView.tag == 1) {
         return self.minutes.count;
