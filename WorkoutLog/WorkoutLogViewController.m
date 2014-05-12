@@ -68,7 +68,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return self.workoutLogEntries.count;
 }
@@ -98,8 +97,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     WorkoutsOnDate *workouts = [self.workoutLogEntries objectAtIndex:indexPath.section];
-    NSInteger section = indexPath.section;
-    NSInteger row = indexPath.row;
+//    NSInteger section = indexPath.section;
+//    NSInteger row = indexPath.row;
     //ERROR
     WorkoutEntry *workout = [workouts.workoutEntries objectAtIndex:indexPath.row];
     
@@ -184,6 +183,7 @@
 
 
 - (IBAction)addWorkout:(id)sender {
+#warning Incomplete
     NSLog(@"Add button clicked");
     if (!self.workoutLogEntries) {
         self.workoutLogEntries = [[NSMutableArray alloc] init];

@@ -36,6 +36,5 @@
 - (void)shouldShowDateTitleAndLabel:(BOOL)yesOrNo;
 
 - (IBAction)done:(id)sender;
-- (IBAction)save:(id)sender;
 
 @end
