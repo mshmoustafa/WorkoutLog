@@ -220,7 +220,14 @@
 
 - (NSMutableArray *)todayWorkoutEntries
 {
-    return [[self allWorkoutEntriesByDate] firstObject];
+
+    for (WorkoutsOnDate *workoutsOnDate in [self allWorkoutEntriesByDate]) {
+        if ([[WorkoutLogStore dateMidnight:[NSDate date]] isEqualToDate:workoutsOnDate.date]) {
+            return workoutsOnDate.workoutEntries;
+        }
+    }
+    
+    return nil;
 }
 
 /*

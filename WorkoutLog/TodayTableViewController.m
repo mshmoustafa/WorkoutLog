@@ -30,8 +30,8 @@
 {
     [super viewDidLoad];
     
-    if (!self.selectedRows) {
-        self.selectedRows = [[NSMutableDictionary alloc] init];
+    if (!self.completedWorkoutEntryTemplates) {
+        self.completedWorkoutEntryTemplates = [[NSMutableArray alloc] init];
     }
     
 //        NSNumber *negativeKey = @-1;
@@ -59,6 +59,12 @@
 {
     self.workoutEntryTemplatesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntryTemplates];
     self.workoutEntriesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntries];
+    if (!self.workoutEntryTemplatesToday) {
+        self.workoutEntryTemplatesToday = [[NSMutableArray alloc] init];
+    }
+    if (!self.workoutEntriesToday) {
+        self.workoutEntriesToday = [[NSMutableArray alloc] init];
+    }
     [self.tableView reloadData];
 }
 
@@ -108,7 +114,7 @@
         
         cell.isCompleted = YES;
         
-        [self.selectedRows setValue:cell forKey:workoutEntryTemplate.name];
+//        [self.completedWorkoutEntryTemplates addObject:workoutEntryTemplate.UID];
         
         cell.backgroundColor = [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1.0];
         
@@ -148,26 +154,43 @@
     
     WorkoutEntryTemplate *workoutEntryTemplate = [self.workoutEntryTemplatesToday objectAtIndex:indexPath.row];
     
-    if ([self.selectedRows objectForKey:workoutEntryTemplate.name]) {
+    BOOL workoutEntryMatchesTemplate = NO;
+    WorkoutEntry *matchedWorkoutEntry = nil;
+    for (WorkoutEntry *workoutEntry in self.workoutEntriesToday) {
+        if ([workoutEntry.name isEqualToString:workoutEntryTemplate.name]) {
+            workoutEntryMatchesTemplate = YES;
+            matchedWorkoutEntry = workoutEntry;
+            break;
+        }
+    }
+    
+    //if workout entry template is found, delete it from completed workouts
+    if (workoutEntryMatchesTemplate) {
 //        [self.completedWorkouts removeObjectForKey:[key stringValue]];
         
         WorkoutLogStore *store = [WorkoutLogStore sharedStore];
         
-        [[WorkoutLogStore sharedStore] deleteWorkoutEntryByUID:workout.UID];
-        //unstrikethrough text
+        [[WorkoutLogStore sharedStore] deleteWorkoutEntry:matchedWorkoutEntry];
+        
+        self.workoutEntriesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntries];
+        
     } else {
-        WorkoutEntryTemplate *template = [self.workoutEntryTemplatesToday objectAtIndex:indexPath.row];
-        if (template) {
-            workout = [template makeWorkoutEntryFromTemplate];
-            workout.date = [WorkoutLogStore dateMidnight:workout.date];
-            
+        
+//        [self.completedWorkoutEntryTemplates addObject:workoutEntryTemplate.UID];
+        
+//        WorkoutEntryTemplate *template = [self.workoutEntryTemplatesToday objectAtIndex:indexPath.row];
+//        if (template) {
+            WorkoutEntry *workout = [workoutEntryTemplate makeWorkoutEntryFromTemplate];
+//            workout.date = [WorkoutLogStore dateMidnight:workout.date];
+        
             WorkoutLogStore *store = [WorkoutLogStore sharedStore];
-            [[[WorkoutLogStore sharedStore] allWorkoutEntries] addObject:workout];
+        
+            [[WorkoutLogStore sharedStore] addWorkoutEntry:workout];
+        
+        self.workoutEntriesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntries];
             
-            [self.completedWorkouts setValue:workout forKey:[key stringValue]];
-        }
+//        }
 
-        //strikethrough text
     }
     
     [[WorkoutLogStore sharedStore] saveData];

@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) NSMutableArray *workoutEntryTemplatesToday;
 @property (strong, nonatomic) NSMutableArray *workoutEntriesToday;
-@property (strong, nonatomic) NSMutableDictionary *selectedRows;
+@property (strong, nonatomic) NSMutableArray *completedWorkoutEntryTemplates;
 //@property (strong, nonatomic) NSMutableDictionary *completedCells;
 
 //- (IBAction)onLongPress:(UILongPressGestureRecognizer *)sender;
