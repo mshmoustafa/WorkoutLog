@@ -30,8 +30,16 @@
 {
     [super viewDidLoad];
     
-    if (!self.completedWorkouts) {
-        self.completedWorkouts = [[NSMutableDictionary alloc] init];
+    if (!self.selectedRows) {
+        self.selectedRows = [[NSMutableDictionary alloc] init];
+    }
+    
+//        NSNumber *negativeKey = @-1;
+//        for (WorkoutEntry *workoutEntry in [[WorkoutLogStore sharedStore] todayWorkoutEntries]) {
+//            [self.completedWorkouts setValue:workoutEntry forKey:[negativeKey stringValue]];
+//            negativeKey = [NSNumber numberWithLong:[negativeKey longValue] - 1];
+//        }
+        
     }
 //    for (int i = 0; i < 5; i++) {
 //        [self.workoutsToday addObject:[NSNumber numberWithInt:i]];
@@ -45,11 +53,12 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
+//}
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.workoutsToday = [[WorkoutLogStore sharedStore] todayWorkoutEntryTemplates];
+    self.workoutEntryTemplatesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntryTemplates];
+    self.workoutEntriesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntries];
     [self.tableView reloadData];
 }
 
@@ -70,7 +79,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.workoutsToday.count;
+    return self.workoutEntryTemplatesToday.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -79,15 +88,27 @@
     
     TodayWorkoutTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    WorkoutEntryTemplate *workout = [self.workoutsToday objectAtIndex:indexPath.row];
+    WorkoutEntryTemplate *workoutEntryTemplate = [self.workoutEntryTemplatesToday objectAtIndex:indexPath.row];
     
-    NSNumber *key = [NSNumber numberWithInt:indexPath.row];
-    NSArray *allKeys = [self.completedWorkouts allKeys];
+//    NSNumber *key = [NSNumber numberWithLong:indexPath.row];
+//    NSArray *allKeys = [self.completedWorkouts allKeys];
     
-    NSMutableAttributedString *nameLabelText = [[NSMutableAttributedString alloc] initWithString:workout.description];
-    NSMutableAttributedString *detailText = [[NSMutableAttributedString alloc] initWithString:[NSMutableString stringWithFormat:@"%d Reps, %d Sets, %d Weight, %d:%d", workout.reps, workout.sets, workout.weight, workout.min, workout.sec]];
+    NSMutableAttributedString *nameLabelText = [[NSMutableAttributedString alloc] initWithString:workoutEntryTemplate.description];
+    NSMutableAttributedString *detailText = [[NSMutableAttributedString alloc] initWithString:[NSMutableString stringWithFormat:@"%lu Reps, %lu Sets, %lu Weight, %lu:%lu", (unsigned long)workoutEntryTemplate.reps, (unsigned long)workoutEntryTemplate.sets, (unsigned long)workoutEntryTemplate.weight, (unsigned long)workoutEntryTemplate.min, (unsigned long)workoutEntryTemplate.sec]];
     
-    if ([[self.completedWorkouts allKeys] containsObject:[key stringValue]]) {
+    BOOL workoutEntryMatchesTemplate = NO;
+    for (WorkoutEntry *workoutEntry in self.workoutEntriesToday) {
+        if ([workoutEntry.name isEqualToString:workoutEntryTemplate.name]) {
+            workoutEntryMatchesTemplate = YES;
+            break;
+        }
+    }
+    
+    if (workoutEntryMatchesTemplate) {
+        
+        cell.isCompleted = YES;
+        
+        [self.selectedRows setValue:cell forKey:workoutEntryTemplate.name];
         
         cell.backgroundColor = [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1.0];
         
@@ -105,12 +126,13 @@
         //                                range:NSMakeRange(0, [attributeString length])];
         
     } else {
+        
+        cell.isCompleted = NO;
+        
         cell.backgroundColor = [UIColor whiteColor];
     }
     
     cell.workoutNameLabel.attributedText = nameLabelText;
-    
-    
     
     cell.workoutInfoLabel.attributedText = detailText;
     
@@ -121,17 +143,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSNumber *key = [NSNumber numberWithInt:indexPath.row];
-    WorkoutEntry *workout = [self.completedWorkouts valueForKey:[key stringValue]];
-    if (workout) {
-        [self.completedWorkouts removeObjectForKey:[key stringValue]];
+//    NSNumber *key = [NSNumber numberWithLong:indexPath.row];
+//    WorkoutEntry *workout = [self.completedWorkouts valueForKey:[key stringValue]];
+    
+    WorkoutEntryTemplate *workoutEntryTemplate = [self.workoutEntryTemplatesToday objectAtIndex:indexPath.row];
+    
+    if ([self.selectedRows objectForKey:workoutEntryTemplate.name]) {
+//        [self.completedWorkouts removeObjectForKey:[key stringValue]];
         
         WorkoutLogStore *store = [WorkoutLogStore sharedStore];
         
-        [[[WorkoutLogStore sharedStore] allWorkoutEntries] removeObject:workout];
+        [[WorkoutLogStore sharedStore] deleteWorkoutEntryByUID:workout.UID];
         //unstrikethrough text
     } else {
-        WorkoutEntryTemplate *template = [self.workoutsToday objectAtIndex:indexPath.row];
+        WorkoutEntryTemplate *template = [self.workoutEntryTemplatesToday objectAtIndex:indexPath.row];
         if (template) {
             workout = [template makeWorkoutEntryFromTemplate];
             workout.date = [WorkoutLogStore dateMidnight:workout.date];
@@ -222,7 +247,7 @@
     NSLog(@"Edit button clicked on row: %d", editButton.tag);
     
     WorkoutEditViewController *vc = segue.destinationViewController;
-    vc.workoutTemplate = [self.workoutsToday objectAtIndex:editButton.tag];
+    vc.workoutTemplate = [self.workoutEntryTemplatesToday objectAtIndex:editButton.tag];
     [vc shouldShowDateButton:NO];
 }
 

@@ -14,22 +14,24 @@
 
 #pragma mark - Initialization
 
-//- (instancetype)initWithCoder:(NSCoder *)decoder
-//{
-//    self = [super init];
-//    if (self) {
-//        workoutPlans = [decoder decodeObjectForKey:@"workoutPlans"];
-//        workoutEntryTemplates = [decoder decodeObjectForKey:@"workoutEntryTemplates"];
-//        workoutEntries = [decoder decodeObjectForKey:@"workoutEntries"];
-//    }
-//    return self;
-//}
-
-//- (void)encodeWithCoder:(NSCoder *)encoder {
-//    [encoder encodeObject:workoutPlans forKey:@"workoutPlans"];
-//    [encoder encodeObject:workoutEntryTemplates forKey:@"workoutEntryTemplates"];
-//    [encoder encodeObject:workoutEntries forKey:@"workoutEntries"];
-//}
+/*
+ - (instancetype)initWithCoder:(NSCoder *)decoder
+ {
+ self = [super init];
+ if (self) {
+ workoutPlans = [decoder decodeObjectForKey:@"workoutPlans"];
+ workoutEntryTemplates = [decoder decodeObjectForKey:@"workoutEntryTemplates"];
+ workoutEntries = [decoder decodeObjectForKey:@"workoutEntries"];
+ }
+ return self;
+ }
+ 
+ - (void)encodeWithCoder:(NSCoder *)encoder {
+ [encoder encodeObject:workoutPlans forKey:@"workoutPlans"];
+ [encoder encodeObject:workoutEntryTemplates forKey:@"workoutEntryTemplates"];
+ [encoder encodeObject:workoutEntries forKey:@"workoutEntries"];
+ }
+ */
 
 - (id)init
 {
@@ -38,6 +40,7 @@
         
         NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
+        NSLog(@"document path: %@", documentPath);
         
         NSString *file = [documentPath stringByAppendingString:@"/plans.archive"];
         
@@ -51,6 +54,10 @@
         
         workoutEntries = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
         
+//        file = [documentPath stringByAppendingString:@"/completedentries.archive"];
+//        
+//        completedWorkoutEntriesToday = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+        
         if (!workoutPlans) {
             workoutPlans = [[NSMutableArray alloc] init];
         }
@@ -60,10 +67,14 @@
         if (!workoutEntries) {
             workoutEntries = [[NSMutableArray alloc] init];
         }
+//        if (!completedWorkoutEntriesToday) {
+//            completedWorkoutEntriesToday = [[NSMutableDictionary alloc] init];
+//        }
         //        [self dummyInit];
         NSLog(@"%@", workoutPlans.description);
         NSLog(@"%@", workoutEntryTemplates.description);
         NSLog(@"%@", workoutEntries.description);
+//        NSLog(@"%@", completedWorkoutEntriesToday.description);
     }
     return self;
 }
@@ -118,6 +129,9 @@
     return sharedStore;
 }
 
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
 #pragma mark - Getters
 
 - (NSMutableArray *)allWorkoutPlans
@@ -170,6 +184,11 @@
     return workoutEntriesByDate;
 }
 
+//- (NSMutableDictionary *)completedWorkoutEntriesToday
+//{
+//    return completedWorkoutEntriesToday;
+//}
+
 - (NSMutableArray *)todayWorkoutEntryTemplates
 {
     NSMutableOrderedSet *todaysPlans = [[NSMutableOrderedSet alloc] init];
@@ -180,7 +199,7 @@
     NSDateComponents *components = [cal components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
     //    NSLog(@"Today is: %d", components.weekday);
     
-    Day *today = [Day getDayByNumber:[NSNumber numberWithInt:components.weekday]];
+    Day *today = [Day getDayByNumber:[NSNumber numberWithLong:components.weekday]];
     
     for (WorkoutPlan *plan in [[WorkoutLogStore sharedStore] allWorkoutPlans]) {
         for (Day *day in plan.days) {
@@ -199,7 +218,128 @@
     return todaysWorkouts;
 }
 
-#warning make methods that can create plans, workout templates, and workout entries
+- (NSMutableArray *)todayWorkoutEntries
+{
+    return [[self allWorkoutEntriesByDate] firstObject];
+}
+
+/*
+ #warning unused method
+ - (NSMutableArray *)todayWorkoutEntries
+ {
+ NSMutableArray *workoutEntriesToday = [[NSMutableArray alloc] init];
+ 
+ NSCalendar *cal = [NSCalendar currentCalendar];
+ 
+ NSDateComponents *todayComponents = [cal components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+ 
+ Day *todayDay = [Day getDayByNumber:[NSNumber numberWithLong:todayComponents.weekday]];
+ 
+ for (WorkoutEntry *workoutEntry in self.allWorkoutEntries) {
+ 
+ NSDateComponents *workoutComponents = [cal components:NSWeekdayCalendarUnit fromDate:workoutEntry.date];
+ 
+ Day *workoutEntryDay = [Day getDayByNumber:[NSNumber numberWithLong:workoutComponents.weekday]];
+ 
+ if ([todayDay.dayName isEqualToString:workoutEntryDay.dayName]) {
+ [workoutEntriesToday addObject:workoutEntry];
+ }
+ }
+ 
+ return workoutEntriesToday;
+ }
+ */
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Adders
+
+- (void)addWorkoutEntryFromTemplate:(WorkoutEntryTemplate *)workoutEntryTemplate
+{
+    WorkoutEntry *workoutEntry = [workoutEntryTemplate makeWorkoutEntryFromTemplate];
+    
+    [self addWorkoutEntry:workoutEntry];
+}
+
+- (void)addWorkoutEntry:(WorkoutEntry *)workoutEntry
+{
+    if (![self workoutEntryExists:workoutEntry]) {
+        [workoutEntries addObject:workoutEntry];
+    }
+}
+
+//- (void)addCompletedWorkoutEntryToday:(WorkoutEntry *)workoutEntry withKey:(NSString *)key
+//{
+//    [completedWorkoutEntriesToday setValue:workoutEntry forKey:key];
+//    [workoutEntries addObject:workoutEntry];
+//}
+
+- (void)addWorkoutEntryTemplate:(WorkoutEntryTemplate *)workoutEntryTemplate
+{
+    [workoutEntryTemplates addObject:workoutEntryTemplate];
+}
+
+- (void)addWorkoutPlan:(WorkoutPlan *)plan
+{
+    [workoutPlans addObject:plan];
+}
+
+#pragma mark - Deleters
+
+- (void)deleteWorkoutEntry:(WorkoutEntry *)workoutEntry
+{
+    [self deleteWorkoutEntryByUID:workoutEntry.UID andDate:workoutEntry.date];
+}
+
+- (void)deleteWorkoutEntryByUID:(NSNumber *)UID andDate:(NSDate *)date
+{
+    
+    //find the workout in allWorkoutEntries
+    long indexInWorkoutEntries = -1;
+//    NSString *foundKey = nil;
+    for (WorkoutEntry *workout in self.allWorkoutEntries) {
+        if ([UID isEqualToNumber:workout.UID] && [date isEqualToDate:workout.date]) {
+            indexInWorkoutEntries = [self.allWorkoutEntries indexOfObject:workout];
+            break;
+        }
+    }
+    
+    //now find the same workout in completedWorkoutEntriesToday
+//    NSArray *allKeys = [self.completedWorkoutEntriesToday allKeys];
+//    for (NSString *key in allKeys) {
+//        WorkoutEntry *workout = (WorkoutEntry *)[self.completedWorkoutEntriesToday valueForKey:key];
+//        if ([UID isEqualToNumber:workout.UID]) {
+//            foundKey = [key copy];
+//            break;
+//        }
+//    }
+    //delete both
+    if (indexInWorkoutEntries != -1) {
+        [self.allWorkoutEntries removeObjectAtIndex:indexInWorkoutEntries];
+    }
+//    if (foundKey) {
+//        [self.completedWorkoutEntriesToday removeObjectForKey:foundKey];
+//    }
+    return;
+}
+
+//- (void)deleteCompletedWorkoutEntryTodayByUID:(NSNumber *)UID
+//{
+//    //deleteWorkoutEntryByUID deletes both
+//    [self deleteWorkoutEntryByUID:UID];
+//    return;
+//}
+
+- (void)deleteWorkoutEntryTemplateByUID:(NSNumber *)UID
+{
+    
+}
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Convenience Methods
 
 + (NSDate *)dateMidnight:(NSDate *)date
 {
@@ -215,23 +355,45 @@
     return date;
 }
 
-- (void)loadData
+- (BOOL)workoutEntryExists:(WorkoutEntry *)workoutEntry
 {
-    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
-    
-    NSString *file = [documentPath stringByAppendingString:@"/plans.archive"];
-    
-    [NSKeyedUnarchiver unarchiveObjectWithFile:file];
-    
-    file = [documentPath stringByAppendingString:@"/templates.archive"];
-    
-    [NSKeyedUnarchiver unarchiveObjectWithFile:file];
-    
-    file = [documentPath stringByAppendingString:@"/entries.archive"];
-    
-    [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+    for (WorkoutEntry *existingWorkoutEntry in workoutEntries) {
+        if ([workoutEntry.UID isEqualToNumber:existingWorkoutEntry.UID] && [workoutEntry.date isEqualToDate:existingWorkoutEntry.date]) {
+            return YES;
+        }
+    }
+    return NO;
 }
+
+/*
+ #warning unused method
+ - (void)loadData
+ {
+ NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+ NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
+ 
+ NSString *file = [documentPath stringByAppendingString:@"/plans.archive"];
+ 
+ [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+ 
+ file = [documentPath stringByAppendingString:@"/templates.archive"];
+ 
+ [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+ 
+ file = [documentPath stringByAppendingString:@"/entries.archive"];
+ 
+ [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+ 
+ file = [documentPath stringByAppendingString:@"/completedentries.archive"];
+ 
+ [NSKeyedUnarchiver unarchiveObjectWithFile:file];
+ }
+ */
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+#pragma mark - Persistence
 
 - (void)saveData
 {
@@ -250,30 +412,34 @@
     
     [NSKeyedArchiver archiveRootObject:workoutEntries toFile:file];
     
+//    file = [documentPath stringByAppendingString:@"/completedentries.archive"];
+    
+//    [NSKeyedArchiver archiveRootObject:completedWorkoutEntriesToday toFile:file];
+    
     NSLog(@"saved data");
 }
 
-+ (NSString *)applicationDocumentsDirectory
-{
-    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
-    
-    [documentPath appendString:@"/workoutlogstore.archive"];
-    
-    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:documentPath];
-    
-    if (!fileExists) {
-        //do nothing
-    }
-    
-    NSLog(documentPath);
-    
-    //    return [NSURL fileURLWithPath:documentPath];
-    return documentPath;
-}
-
-# pragma mark - NSCoding
-
+/*
+ #warning unused method
+ + (NSString *)applicationDocumentsDirectory
+ {
+ NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+ NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
+ 
+ [documentPath appendString:@"/workoutlogstore.archive"];
+ 
+ BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:documentPath];
+ 
+ if (!fileExists) {
+ //do nothing
+ }
+ 
+ NSLog(documentPath);
+ 
+ //    return [NSURL fileURLWithPath:documentPath];
+ return documentPath;
+ }
+ */
 
 
 @end

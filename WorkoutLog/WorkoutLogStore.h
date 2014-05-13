@@ -20,6 +20,7 @@
     NSMutableArray *workoutPlans;
     NSMutableArray *workoutEntryTemplates;
     NSMutableArray *workoutEntries;
+//    NSMutableDictionary *completedWorkoutEntriesToday;
 }
 
 #pragma mark - Shared Store
@@ -31,6 +32,8 @@
 - (NSMutableArray *)allWorkoutEntries;
 - (NSMutableArray *)allWorkoutEntriesByDate;
 - (NSMutableArray *)todayWorkoutEntryTemplates;
+- (NSMutableArray *)todayWorkoutEntries;
+//- (NSMutableDictionary *)completedWorkoutEntriesToday;
 
 #pragma mark - Time Convenience Methods
 
@@ -42,9 +45,22 @@
  @endcode
  */
 + (NSDate *)dateMidnight:(NSDate *)date;
+- (BOOL)workoutEntryExists:(WorkoutEntry *)workoutEntry;
 
-+ (NSString *)applicationDocumentsDirectory;
+#pragma mark - Adders
+
+- (void)addWorkoutEntryFromTemplate:(WorkoutEntryTemplate *)workoutEntryTemplate;
+- (void)addWorkoutEntry:(WorkoutEntry *)workoutEntry;
+//- (void)addCompletedWorkoutEntryToday:(WorkoutEntry *)workoutEntry withKey:(NSString *)key;
+- (void)addWorkoutEntryTemplate:(WorkoutEntryTemplate *)workoutEntryTemplate;
+- (void)addWorkoutPlan:(WorkoutPlan *)plan;
+
+
+#pragma mark - Deleters
+
+- (void)deleteWorkoutEntryByUID:(NSNumber *)UID andDate:(NSDate *)date;
+//- (void)deleteCompletedWorkoutEntryTodayByUID:(NSNumber *)UID;
+
 - (void)saveData;
-- (void)loadData;
 
 @end

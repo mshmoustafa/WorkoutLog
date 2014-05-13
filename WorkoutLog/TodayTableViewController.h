@@ -10,9 +10,10 @@
 
 @interface TodayTableViewController : UITableViewController
 
-@property (strong, nonatomic) NSMutableArray *workoutsToday;
-@property (strong, nonatomic) NSMutableArray *selectedRows;
-@property (strong, nonatomic) NSMutableDictionary *completedWorkouts;
+@property (strong, nonatomic) NSMutableArray *workoutEntryTemplatesToday;
+@property (strong, nonatomic) NSMutableArray *workoutEntriesToday;
+@property (strong, nonatomic) NSMutableDictionary *selectedRows;
+//@property (strong, nonatomic) NSMutableDictionary *completedCells;
 
 //- (IBAction)onLongPress:(UILongPressGestureRecognizer *)sender;
 //- (IBAction)edit:(id)sender;

@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *workoutInfoLabel;
 //@property (weak, nonatomic) IBOutlet UIStepper *workoutStepper;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (nonatomic) BOOL isCompleted;
 
 
 

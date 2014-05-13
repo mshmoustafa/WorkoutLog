@@ -7,6 +7,7 @@
 //
 
 #import "WorkoutEntry.h"
+#import "WorkoutLogStore.h"
 #import "RandomString.h"
 
 @implementation WorkoutEntry
@@ -57,7 +58,7 @@
     //I shouldn't allow any workouts in the same plan to have the same name b/c I'll be looking up workouts based on name.  Workouts in different plans can have the same name.
     [self setUID:[NSNumber numberWithInt:arc4random()]];
     [self setName:@"Workout"];
-    [self setDate:[NSDate date]]; //this should be the current date
+    [self setDate:[WorkoutLogStore dateMidnight:[NSDate date]]]; //this should be the current date
     [self setReps:0];
     [self setSets:0];
     [self setWeight:0];
@@ -159,5 +160,25 @@
 //        return NO;
 //    }
 //}
+
+- (BOOL)isEqualToWorkoutEntry:(WorkoutEntry *)workoutEntry
+{
+    if (![self.date isEqualToDate:workoutEntry.date]) {
+        return NO;
+    } else if ([self.UID isEqualToNumber:workoutEntry.UID]) {
+        return NO;
+    } else if (![self.name isEqualToString:workoutEntry.name]) {
+        return NO;
+    } else if (![self.plan isEqualToString:workoutEntry.plan]) {
+        return NO;
+    } else if (!self.reps != workoutEntry.reps) {
+        return NO;
+    } else if (!self.sets != workoutEntry.sets) {
+        return NO;
+    } else if (!self.weight != workoutEntry.weight) {
+        return NO;
+    }
+    return YES;
+}
 
 @end

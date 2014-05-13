@@ -135,6 +135,9 @@
         [[[WorkoutLogStore sharedStore] allWorkoutEntries] removeObject:workout];
         
         self.workoutLogEntries = [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
+        
+        [[WorkoutLogStore sharedStore] saveData];
+        
         [tableView reloadData];
 //        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
