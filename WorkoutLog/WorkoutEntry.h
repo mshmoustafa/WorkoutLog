@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) NSString *plan;
+@property (strong, nonatomic) NSString *type;
 
 @property (nonatomic) NSUInteger reps;
 @property (nonatomic) NSUInteger sets;

@@ -38,8 +38,8 @@
     self = [super init];
     if (self) {
         
-        NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
+        NSString *documentPath = [WorkoutLogStore applicationDocumentsDirectory];
+        
         NSLog(@"document path: %@", documentPath);
         
         NSString *file = [documentPath stringByAppendingString:@"/plans.archive"];
@@ -54,10 +54,6 @@
         
         workoutEntries = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
         
-//        file = [documentPath stringByAppendingString:@"/completedentries.archive"];
-//        
-//        completedWorkoutEntriesToday = [NSKeyedUnarchiver unarchiveObjectWithFile:file];
-        
         if (!workoutPlans) {
             workoutPlans = [[NSMutableArray alloc] init];
         }
@@ -67,14 +63,11 @@
         if (!workoutEntries) {
             workoutEntries = [[NSMutableArray alloc] init];
         }
-//        if (!completedWorkoutEntriesToday) {
-//            completedWorkoutEntriesToday = [[NSMutableDictionary alloc] init];
-//        }
-        //        [self dummyInit];
+
         NSLog(@"%@", workoutPlans.description);
         NSLog(@"%@", workoutEntryTemplates.description);
         NSLog(@"%@", workoutEntries.description);
-//        NSLog(@"%@", completedWorkoutEntriesToday.description);
+
     }
     return self;
 }
@@ -220,7 +213,7 @@
 
 - (NSMutableArray *)todayWorkoutEntries
 {
-
+    
     for (WorkoutsOnDate *workoutsOnDate in [self allWorkoutEntriesByDate]) {
         if ([[WorkoutLogStore dateMidnight:[NSDate date]] isEqualToDate:workoutsOnDate.date]) {
             return workoutsOnDate.workoutEntries;
@@ -304,7 +297,7 @@
     
     //find the workout in allWorkoutEntries
     long indexInWorkoutEntries = -1;
-//    NSString *foundKey = nil;
+    //    NSString *foundKey = nil;
     for (WorkoutEntry *workout in self.allWorkoutEntries) {
         if ([UID isEqualToNumber:workout.UID] && [date isEqualToDate:workout.date]) {
             indexInWorkoutEntries = [self.allWorkoutEntries indexOfObject:workout];
@@ -313,21 +306,21 @@
     }
     
     //now find the same workout in completedWorkoutEntriesToday
-//    NSArray *allKeys = [self.completedWorkoutEntriesToday allKeys];
-//    for (NSString *key in allKeys) {
-//        WorkoutEntry *workout = (WorkoutEntry *)[self.completedWorkoutEntriesToday valueForKey:key];
-//        if ([UID isEqualToNumber:workout.UID]) {
-//            foundKey = [key copy];
-//            break;
-//        }
-//    }
+    //    NSArray *allKeys = [self.completedWorkoutEntriesToday allKeys];
+    //    for (NSString *key in allKeys) {
+    //        WorkoutEntry *workout = (WorkoutEntry *)[self.completedWorkoutEntriesToday valueForKey:key];
+    //        if ([UID isEqualToNumber:workout.UID]) {
+    //            foundKey = [key copy];
+    //            break;
+    //        }
+    //    }
     //delete both
     if (indexInWorkoutEntries != -1) {
         [self.allWorkoutEntries removeObjectAtIndex:indexInWorkoutEntries];
     }
-//    if (foundKey) {
-//        [self.completedWorkoutEntriesToday removeObjectForKey:foundKey];
-//    }
+    //    if (foundKey) {
+    //        [self.completedWorkoutEntriesToday removeObjectForKey:foundKey];
+    //    }
     return;
 }
 
@@ -419,34 +412,23 @@
     
     [NSKeyedArchiver archiveRootObject:workoutEntries toFile:file];
     
-//    file = [documentPath stringByAppendingString:@"/completedentries.archive"];
+    //    file = [documentPath stringByAppendingString:@"/completedentries.archive"];
     
-//    [NSKeyedArchiver archiveRootObject:completedWorkoutEntriesToday toFile:file];
+    //    [NSKeyedArchiver archiveRootObject:completedWorkoutEntriesToday toFile:file];
     
     NSLog(@"saved data");
 }
 
-/*
- #warning unused method
- + (NSString *)applicationDocumentsDirectory
- {
- NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
- NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
- 
- [documentPath appendString:@"/workoutlogstore.archive"];
- 
- BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:documentPath];
- 
- if (!fileExists) {
- //do nothing
- }
- 
- NSLog(documentPath);
- 
- //    return [NSURL fileURLWithPath:documentPath];
- return documentPath;
- }
- */
+#warning unused method
++ (NSString *)applicationDocumentsDirectory
+{
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSMutableString *documentPath = [NSMutableString stringWithString:[searchPaths lastObject]];
+    
+    NSLog(documentPath);
+    
+    return documentPath;
+}
 
 
 @end

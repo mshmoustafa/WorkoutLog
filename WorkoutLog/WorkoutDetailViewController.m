@@ -26,10 +26,9 @@
 
 - (void)initializeFields
 {
-    if (shouldShowDateTitleAndLabel) {
-        self.dateTitle.hidden = NO;
-        self.dateLabel.hidden = NO;
-    }
+    
+    [self cell:self.dateCell setHidden:!shouldShowDateCell];
+    [self reloadDataAnimated:NO];
     
     self.navBar.title = [_workoutEntry name];
     self.planName.text = self.workoutEntry.plan;
@@ -76,17 +75,17 @@
         UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
         ((WorkoutEditViewController *)[nav.childViewControllers firstObject]).workoutTemplate = self.workoutEntry;
         
-        [((WorkoutEditViewController *)[nav.childViewControllers firstObject]) shouldShowDateButton:shouldShowDateTitleAndLabel];
+        [((WorkoutEditViewController *)[nav.childViewControllers firstObject]) shouldShowDateButton:shouldShowDateCell];
     }
 }
 
 - (void)shouldShowDateTitleAndLabel:(BOOL)yesOrNo
 {
-    shouldShowDateTitleAndLabel = yesOrNo;
+    shouldShowDateCell = yesOrNo;
 }
 
 - (IBAction)done:(id)sender {
-//    [[self presentingViewController] dismissViewControllerAnimated:YES completion:self.dismissBlock];
+    //    [[self presentingViewController] dismissViewControllerAnimated:YES completion:self.dismissBlock];
     [self.navigationController popViewControllerAnimated:YES];
 }
 @end

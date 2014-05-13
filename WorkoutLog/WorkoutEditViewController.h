@@ -12,7 +12,7 @@
 
 @interface WorkoutEditViewController : StaticDataTableViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 {
-    BOOL shouldShowDateButton;
+    BOOL shouldShowDateCell;
 }
 
 //Changed this property from WorkoutEntryTemplate to WorkoutEntry
@@ -30,7 +30,9 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *minutesPicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *secondsPicker;
 
-@property (weak, nonatomic) IBOutlet UIButton *dateButton;
+//@property (weak, nonatomic) IBOutlet UIButton *dateButton;
+@property (weak, nonatomic) IBOutlet UITableViewCell *dateCell;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
 @property (nonatomic) NSUInteger selectedMinutes;
 @property (nonatomic) NSUInteger selectedSeconds;

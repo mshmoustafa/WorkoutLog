@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StaticDataTableViewController/StaticDataTableViewController.h"
 #import "WorkoutEntry.h"
 
-@interface WorkoutDetailViewController : UITableViewController
+@interface WorkoutDetailViewController : StaticDataTableViewController
 {
-    BOOL shouldShowDateTitleAndLabel;
+    BOOL shouldShowDateCell;
 }
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
@@ -29,8 +30,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *minutesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondsLabel;
 
+@property (weak, nonatomic) IBOutlet UITableViewCell *dateCell;
 @property (weak, nonatomic) IBOutlet UILabel *dateTitle;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+
 
 
 - (void)shouldShowDateTitleAndLabel:(BOOL)yesOrNo;

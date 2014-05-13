@@ -50,10 +50,11 @@
 
 - (void)initializeFields
 {
-//    if (shouldShowDateButton == YES) {
-//        self.dateButton.enabled = YES;
-//        self.dateButton.hidden = NO;
-//    }
+    [self cell:self.dateCell setHidden:!shouldShowDateCell];
+    [self reloadDataAnimated:YES];
+//    [self.dateCell setHidden:YES];
+    
+    self.datePicker.date = self.workoutTemplate.date;
     
     self.minutesPicker.tag = 1;
     self.secondsPicker.tag = 2;
@@ -112,7 +113,7 @@
 
 - (void)shouldShowDateButton:(BOOL)yesOrNo
 {
-    shouldShowDateButton = yesOrNo;
+    shouldShowDateCell = yesOrNo;
 }
 
 
@@ -197,6 +198,10 @@
     self.workoutTemplate.weight = [self.weightLabel.text integerValue];
     self.workoutTemplate.min = self.selectedMinutes;
     self.workoutTemplate.sec = self.selectedSeconds;
+    
+    if (shouldShowDateCell) {
+        self.workoutTemplate.date = [WorkoutLogStore dateMidnight:self.datePicker.date];
+    }
     
     [[WorkoutLogStore sharedStore] saveData];
     

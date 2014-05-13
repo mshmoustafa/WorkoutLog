@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 Muhammad-Sharif Moustafa. All rights reserved.
 //
 
+#define WORKOUT_TYPE_WEIGHT         @"Weight"
+#define WORKOUT_TYPE_CARDIO         @"Cardio/Timed"
+#define WORKOUT_TYPE_CUSTOM         @"Custom"
+
 #import "WorkoutEntry.h"
 #import "WorkoutLogStore.h"
 #import "RandomString.h"
@@ -15,6 +19,7 @@
 #pragma mark - Properties
 @synthesize name = _name;
 @synthesize date = _date;
+@synthesize type = _type;
 @synthesize reps = _reps;
 @synthesize sets = _sets;
 @synthesize weight = _weight;
@@ -29,6 +34,7 @@
         self.name = [decoder decodeObjectForKey:@"name"];
         self.date = [decoder decodeObjectForKey:@"date"];
         self.plan = [decoder decodeObjectForKey:@"plan"];
+        self.type = [decoder decodeObjectForKey:@"type"];
         self.reps = [decoder decodeIntegerForKey:@"reps"];
         self.sets = [decoder decodeIntegerForKey:@"sets"];
         self.weight = [decoder decodeIntegerForKey:@"weight"];
@@ -43,6 +49,7 @@
     [encoder encodeObject:self.name forKey:@"name"];
     [encoder encodeObject:self.date forKey:@"date"];
     [encoder encodeObject:self.plan forKey:@"plan"];
+    [encoder encodeObject:self.type forKey:@"type"];
     [encoder encodeInteger:self.reps forKey:@"reps"];
     [encoder encodeInteger:self.sets forKey:@"sets"];
     [encoder encodeInteger:self.weight forKey:@"weight"];
@@ -58,7 +65,8 @@
     //I shouldn't allow any workouts in the same plan to have the same name b/c I'll be looking up workouts based on name.  Workouts in different plans can have the same name.
     [self setUID:[NSNumber numberWithInt:arc4random()]];
     [self setName:@"Workout"];
-    [self setDate:[WorkoutLogStore dateMidnight:[NSDate date]]]; //this should be the current date
+    [self setDate:[WorkoutLogStore dateMidnight:[NSDate date]]];
+    [self setType:WORKOUT_TYPE_CUSTOM];
     [self setReps:0];
     [self setSets:0];
     [self setWeight:0];
@@ -170,6 +178,8 @@
     } else if (![self.name isEqualToString:workoutEntry.name]) {
         return NO;
     } else if (![self.plan isEqualToString:workoutEntry.plan]) {
+        return NO;
+    } else if (![self.type isEqualToString:workoutEntry.type]) {
         return NO;
     } else if (!self.reps != workoutEntry.reps) {
         return NO;

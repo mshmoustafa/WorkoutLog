@@ -21,6 +21,7 @@
         self.name = [decoder decodeObjectForKey:@"name"];
         self.date = [decoder decodeObjectForKey:@"date"];
         self.plan = [decoder decodeObjectForKey:@"plan"];
+        self.type = [decoder decodeObjectForKey:@"type"];
         self.reps = [decoder decodeIntegerForKey:@"reps"];
         self.sets = [decoder decodeIntegerForKey:@"sets"];
         self.weight = [decoder decodeIntegerForKey:@"weight"];
@@ -37,6 +38,7 @@
     [encoder encodeObject:self.name forKey:@"name"];
     [encoder encodeObject:self.date forKey:@"date"];
     [encoder encodeObject:self.plan forKey:@"plan"];
+    [encoder encodeObject:self.type forKey:@"type"];
     [encoder encodeInteger:self.reps forKey:@"reps"];
     [encoder encodeInteger:self.sets forKey:@"sets"];
     [encoder encodeInteger:self.weight forKey:@"weight"];
@@ -65,6 +67,7 @@
 {
     WorkoutEntry *entry = [[WorkoutEntry alloc] init];
     entry.name = [NSString stringWithString:self.name];
+    entry.type = [self.type mutableCopy];
     entry.reps = self.reps;
     entry.sets = self.sets;
     entry.weight = self.weight;
@@ -74,7 +77,7 @@
     return entry;
 }
 
-- (WorkoutEntryTemplate *)createNewWorkoutEntryTemplate
++ (WorkoutEntryTemplate *)createNewWorkoutEntryTemplate
 {
     static int workoutEntryTemplateCount = 0;
     
