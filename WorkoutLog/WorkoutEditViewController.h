@@ -20,6 +20,7 @@
 @property (weak, nonatomic) WorkoutEntry *workoutTemplate;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *typeSegmentedControl;
 @property (weak, nonatomic) IBOutlet UILabel *planLabel;
 @property (weak, nonatomic) IBOutlet UITextField *repsLabel;
 @property (weak, nonatomic) IBOutlet UIStepper *repsStepper;
@@ -42,6 +43,7 @@
 
 - (void)shouldShowDateButton:(BOOL)yesOrNo;
 
+- (IBAction)typeSegmentedControlChanged:(UISegmentedControl *)sender;
 - (IBAction)repStepperChanged:(id)sender;
 - (IBAction)setsStepperChanged:(id)sender;
 - (IBAction)weightStepperChanged:(id)sender;

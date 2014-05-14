@@ -27,10 +27,40 @@
 - (void)initializeFields
 {
     
+    [self reloadDataAnimated:NO];
+    
+    self.hideSectionsWithHiddenRows = YES;
+    
     [self cell:self.dateCell setHidden:!shouldShowDateCell];
+    
+    if ([self.workoutEntry.type isEqualToString:WORKOUT_TYPE_CARDIO]) {
+        
+        BOOL hidden = YES;
+        
+        [self cell:self.minutesCell setHidden:!hidden];
+        [self cell:self.secondsCell setHidden:!hidden];
+        
+        [self cell:self.repsCell setHidden:hidden];
+        [self cell:self.setsCell setHidden:hidden];
+        [self cell:self.weightCell setHidden:hidden];
+        
+    } else if ([self.workoutEntry.type isEqualToString:WORKOUT_TYPE_WEIGHT]) {
+        
+        BOOL hidden = NO;
+        
+        [self cell:self.minutesCell setHidden:!hidden];
+        [self cell:self.secondsCell setHidden:!hidden];
+        
+        [self cell:self.repsCell setHidden:hidden];
+        [self cell:self.setsCell setHidden:hidden];
+        [self cell:self.weightCell setHidden:hidden];
+        
+    }
+    
     [self reloadDataAnimated:NO];
     
     self.navBar.title = [_workoutEntry name];
+    self.typeLabel.text = self.workoutEntry.type;
     self.planName.text = self.workoutEntry.plan;
 #warning *aesthetic: don't show fields that aren't set
     self.repsLabel.text = [[NSNumber numberWithLong:self.workoutEntry.reps] stringValue];

@@ -60,6 +60,9 @@
     self.secondsPicker.tag = 2;
     
     self.nameLabel.text = self.workoutTemplate.name;
+    
+    self.typeSegmentedControl.selectedSegmentIndex = [WORKOUT_TYPES indexOfObject:self.workoutTemplate.type];
+    
     self.planLabel.text = self.workoutTemplate.plan;
     self.repsLabel.text = [[NSNumber numberWithLong:self.workoutTemplate.reps] stringValue];
     self.repsStepper.value = self.workoutTemplate.reps;
@@ -114,6 +117,9 @@
 - (void)shouldShowDateButton:(BOOL)yesOrNo
 {
     shouldShowDateCell = yesOrNo;
+}
+
+- (IBAction)typeSegmentedControlChanged:(UISegmentedControl *)sender {
 }
 
 
@@ -193,6 +199,7 @@
 
 - (IBAction)done:(id)sender {
     self.workoutTemplate.name = self.nameLabel.text;
+    self.workoutTemplate.type = [WORKOUT_TYPES objectAtIndex:self.typeSegmentedControl.selectedSegmentIndex];
     self.workoutTemplate.reps = [self.repsLabel.text integerValue];
     self.workoutTemplate.sets = [self.setsLabel.text integerValue];
     self.workoutTemplate.weight = [self.weightLabel.text integerValue];

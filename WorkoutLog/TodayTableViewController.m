@@ -99,8 +99,8 @@
 //    NSNumber *key = [NSNumber numberWithLong:indexPath.row];
 //    NSArray *allKeys = [self.completedWorkouts allKeys];
     
-    NSMutableAttributedString *nameLabelText = [[NSMutableAttributedString alloc] initWithString:workoutEntryTemplate.description];
-    NSMutableAttributedString *detailText = [[NSMutableAttributedString alloc] initWithString:[NSMutableString stringWithFormat:@"%lu Reps, %lu Sets, %lu Weight, %lu:%lu", (unsigned long)workoutEntryTemplate.reps, (unsigned long)workoutEntryTemplate.sets, (unsigned long)workoutEntryTemplate.weight, (unsigned long)workoutEntryTemplate.min, (unsigned long)workoutEntryTemplate.sec]];
+    NSMutableAttributedString *nameLabelText = [[NSMutableAttributedString alloc] initWithString:workoutEntryTemplate.name];
+    NSMutableAttributedString *detailText = [[NSMutableAttributedString alloc] initWithString:[workoutEntryTemplate getInfoByType]];
     
     BOOL workoutEntryMatchesTemplate = NO;
     for (WorkoutEntry *workoutEntry in self.workoutEntriesToday) {

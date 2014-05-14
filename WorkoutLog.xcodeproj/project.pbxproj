@@ -278,12 +278,12 @@
 		F05415A018E8D47800D893D7 /* WorkoutPlansTab */ = {
 			isa = PBXGroup;
 			children = (
+				F0F9FF9D18E66A2E009225EB /* WorkoutPlanViewController.m */,
+				F0F9FF9C18E66A2E009225EB /* WorkoutPlanViewController.h */,
 				F097EBB8190A004C007C84AD /* WorkoutPlanEditViewController.h */,
 				F097EBB9190A004C007C84AD /* WorkoutPlanEditViewController.m */,
 				F0F9FF9918E664F6009225EB /* WorkoutPlansController.h */,
 				F0F9FF9A18E664F6009225EB /* WorkoutPlansController.m */,
-				F0F9FF9C18E66A2E009225EB /* WorkoutPlanViewController.h */,
-				F0F9FF9D18E66A2E009225EB /* WorkoutPlanViewController.m */,
 				F0F9FFA218E6768D009225EB /* WorkoutDetailViewController.h */,
 				F0F9FFA318E6768D009225EB /* WorkoutDetailViewController.m */,
 				F07572C8190B568B00DE0BB3 /* WorkoutEditViewController.h */,

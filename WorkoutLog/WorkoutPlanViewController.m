@@ -103,7 +103,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    cell.textLabel.text = [[_workoutEntryTemplates objectAtIndex:indexPath.row] description];
+    WorkoutEntryTemplate *workoutEntryTemplate = [_workoutEntryTemplates objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [workoutEntryTemplate description];
+    cell.detailTextLabel.text = [workoutEntryTemplate getInfoByType];
     
     return cell;
 }

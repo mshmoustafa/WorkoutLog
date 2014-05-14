@@ -6,6 +6,11 @@
 //  Copyright (c) 2014 Muhammad-Sharif Moustafa. All rights reserved.
 //
 
+#define WORKOUT_TYPE_WEIGHT         @"Weight/Reps"
+#define WORKOUT_TYPE_CARDIO         @"Cardio/Timed"
+#define WORKOUT_TYPE_CUSTOM         @"Custom"
+#define WORKOUT_TYPES               @[WORKOUT_TYPE_WEIGHT,WORKOUT_TYPE_CARDIO,WORKOUT_TYPE_CUSTOM]
+
 #import <Foundation/Foundation.h>
 
 @interface WorkoutEntry : NSObject <NSCoding>
@@ -22,6 +27,7 @@
 @property (nonatomic) NSUInteger min;
 @property (nonatomic) NSUInteger sec;
 
+- (NSString *)getInfoByType;
 + (WorkoutEntry *)createNewWorkout;
 
 @end

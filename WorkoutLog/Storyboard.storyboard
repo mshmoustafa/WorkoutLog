@@ -33,12 +33,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WorkoutPlansCell" id="gGU-SB-Hzp">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WorkoutPlansCell" textLabel="aTU-I2-a8G" style="IBUITableViewCellStyleDefault" id="gGU-SB-Hzp">
                                 <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gGU-SB-Hzp" id="5vX-zV-mEj">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aTU-I2-a8G">
+                                            <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="f52-GP-dbo" kind="push" identifier="workoutPlan" id="KaO-XW-W4P"/>
@@ -276,12 +285,28 @@
                             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WorkoutPlanCell" id="aVx-jM-RGj">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WorkoutPlanCell" textLabel="DpK-cU-xUM" detailTextLabel="3yA-5U-P1r" style="IBUITableViewCellStyleSubtitle" id="aVx-jM-RGj">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aVx-jM-RGj" id="XHj-UP-BHs">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DpK-cU-xUM">
+                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3yA-5U-P1r">
+                                            <rect key="frame" x="15" y="25" width="43" height="15"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="9As-xP-NKd" kind="push" identifier="workoutDetail" id="SzA-v3-Hii"/>
@@ -510,6 +535,9 @@
                                                         <segment title="Cardio/Timed"/>
                                                         <segment title="Custom"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="typeSegmentedControlChanged:" destination="8bb-Ha-IKG" eventType="valueChanged" id="dsM-3R-nPq"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -746,6 +774,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="secondsPicker" destination="ur9-mk-Agz" id="RBF-SG-ifH"/>
                         <outlet property="setsLabel" destination="MMh-2y-69n" id="71x-xg-QeW"/>
                         <outlet property="setsStepper" destination="fHk-35-ZRE" id="YtC-4B-pU4"/>
+                        <outlet property="typeSegmentedControl" destination="JtX-Hb-vsg" id="foZ-2G-kGa"/>
                         <outlet property="weightLabel" destination="TXp-AQ-2kd" id="Jc0-oW-2ps"/>
                         <outlet property="weightStepper" destination="EaO-pf-cqI" id="hug-eh-SQo"/>
                     </connections>
@@ -765,7 +794,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <sections>
                             <tableViewSection headerTitle="Type" id="q2p-Zb-nix">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TimeCell" id="PdN-Vf-d47">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TypeCell" id="PdN-Vf-d47">
                                         <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PdN-Vf-d47" id="jGO-9t-Gc1">
@@ -959,11 +988,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="dateCell" destination="VfS-zG-97w" id="hyF-no-Bic"/>
                         <outlet property="dateLabel" destination="joM-OU-PAV" id="FUF-tF-Q7e"/>
+                        <outlet property="minutesCell" destination="7Mf-Zk-J6H" id="xoW-bc-xIb"/>
                         <outlet property="minutesLabel" destination="3Tk-kt-CP2" id="KH7-7Z-6dx"/>
                         <outlet property="planName" destination="UBv-ff-a6W" id="72X-oy-QK9"/>
+                        <outlet property="repsCell" destination="5D6-zh-xsd" id="dri-lk-VX8"/>
                         <outlet property="repsLabel" destination="oW6-ON-kh7" id="Xsa-nX-RU0"/>
+                        <outlet property="secondsCell" destination="vLI-cb-1z5" id="CeH-76-mKj"/>
                         <outlet property="secondsLabel" destination="WKx-DX-RZe" id="Txx-hy-UCk"/>
+                        <outlet property="setsCell" destination="Pxg-de-glo" id="4Vt-s9-0af"/>
                         <outlet property="setsLabel" destination="B2U-tm-FlE" id="qUt-AN-hmz"/>
+                        <outlet property="typeCell" destination="PdN-Vf-d47" id="kDr-mx-P5G"/>
+                        <outlet property="typeLabel" destination="ZBh-fz-RtF" id="JiM-tM-oje"/>
+                        <outlet property="weightCell" destination="yhv-IZ-Z5D" id="n0f-PI-cTP"/>
                         <outlet property="weightLabel" destination="Hb9-VF-Zc5" id="gci-Do-5zO"/>
                     </connections>
                 </tableViewController>
@@ -1019,7 +1055,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="dIp-Ae-2qn"/>
+        <segue reference="SzA-v3-Hii"/>
         <segue reference="8rp-Xk-8Wk"/>
     </inferredMetricsTieBreakers>
 </document>

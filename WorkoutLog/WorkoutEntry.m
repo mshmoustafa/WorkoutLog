@@ -6,10 +6,6 @@
 //  Copyright (c) 2014 Muhammad-Sharif Moustafa. All rights reserved.
 //
 
-#define WORKOUT_TYPE_WEIGHT         @"Weight"
-#define WORKOUT_TYPE_CARDIO         @"Cardio/Timed"
-#define WORKOUT_TYPE_CUSTOM         @"Custom"
-
 #import "WorkoutEntry.h"
 #import "WorkoutLogStore.h"
 #import "RandomString.h"
@@ -62,7 +58,7 @@
     self = [super init];
     
     //set defaults if no params are given
-    //I shouldn't allow any workouts in the same plan to have the same name b/c I'll be looking up workouts based on name.  Workouts in different plans can have the same name.
+    
     [self setUID:[NSNumber numberWithInt:arc4random()]];
     [self setName:@"Workout"];
     [self setDate:[WorkoutLogStore dateMidnight:[NSDate date]]];
@@ -139,6 +135,19 @@
 - (NSString *)description
 {
     return self.name;
+}
+
+- (NSString *)getInfoByType
+{
+    if ([self.type isEqualToString:WORKOUT_TYPE_CARDIO]) {
+        return [NSString stringWithFormat:@"%02lu:%02lu",(unsigned long)self.min, (unsigned long)self.sec];
+    } else if ([self.type isEqualToString:WORKOUT_TYPE_WEIGHT]) {
+        return [NSString stringWithFormat:@"%lu Rep(s), %lu Set(s), %lu Weight", (unsigned long)self.reps, (unsigned long)self.sets, (unsigned long)self.weight];
+    } else {
+        return [NSString stringWithFormat:@"%lu Rep(s), %lu Set(s), %lu Weight, %02lu:%02lu", (unsigned long)self.reps, (unsigned long)self.sets, (unsigned long)self.weight, (unsigned long)self.min, (unsigned long)self.sec];
+    }
+    
+    return nil;
 }
 
 + (WorkoutEntry *)createNewWorkout
