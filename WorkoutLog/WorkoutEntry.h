@@ -12,22 +12,11 @@
 #define WORKOUT_TYPES               @[WORKOUT_TYPE_WEIGHT,WORKOUT_TYPE_CARDIO,WORKOUT_TYPE_CUSTOM]
 
 #import <Foundation/Foundation.h>
+#import "WorkoutEntryTemplate.h"
 
-@interface WorkoutEntry : NSObject <NSCoding>
+@interface WorkoutEntry : WorkoutEntryTemplate <NSCoding>
 
-@property (strong, nonatomic) NSNumber *UID;
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSDate *date;
-@property (strong, nonatomic) NSString *plan;
-@property (strong, nonatomic) NSString *type;
 
-@property (nonatomic) NSUInteger reps;
-@property (nonatomic) NSUInteger sets;
-@property (nonatomic) NSUInteger weight;
-@property (nonatomic) NSUInteger min;
-@property (nonatomic) NSUInteger sec;
-
-- (NSString *)getInfoByType;
 + (WorkoutEntry *)createNewWorkout;
 
 @end

@@ -63,6 +63,24 @@
     
 }
 
+- (NSString *)description
+{
+    return self.name;
+}
+
+- (NSString *)getInfoByType
+{
+    if ([self.type isEqualToString:WORKOUT_TYPE_CARDIO]) {
+        return [NSString stringWithFormat:@"%02lu:%02lu",(unsigned long)self.min, (unsigned long)self.sec];
+    } else if ([self.type isEqualToString:WORKOUT_TYPE_WEIGHT]) {
+        return [NSString stringWithFormat:@"%lu Rep(s), %lu Set(s), %lu Weight", (unsigned long)self.reps, (unsigned long)self.sets, (unsigned long)self.weight];
+    } else {
+        return [NSString stringWithFormat:@"%lu Rep(s), %lu Set(s), %lu Weight, %02lu:%02lu", (unsigned long)self.reps, (unsigned long)self.sets, (unsigned long)self.weight, (unsigned long)self.min, (unsigned long)self.sec];
+    }
+    
+    return nil;
+}
+
 - (WorkoutEntry *)makeWorkoutEntryFromTemplate
 {
     WorkoutEntry *entry = [[WorkoutEntry alloc] init];
