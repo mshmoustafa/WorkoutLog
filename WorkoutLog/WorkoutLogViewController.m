@@ -105,11 +105,11 @@
     cell.textLabel.text = workout.name;
 //    cell.textLabel.text = [[NSNumber numberWithInt:row] description];
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateStyle:NSDateFormatterShortStyle];
-    [formatter setTimeStyle:NSDateFormatterNoStyle];
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateStyle:NSDateFormatterShortStyle];
+//    [formatter setTimeStyle:NSDateFormatterNoStyle];
     
-    cell.detailTextLabel.text = [formatter stringFromDate:workout.date];
+    cell.detailTextLabel.text = [workout getInfoByType];
     
     return cell;
 }
