@@ -50,11 +50,10 @@
 
 - (void)initializeFields
 {
-    [self cell:self.dateCell setHidden:!shouldShowDateCell];
-    [self reloadDataAnimated:YES];
-//    [self.dateCell setHidden:YES];
     
-    self.datePicker.date = self.workoutTemplate.date;
+    if (shouldShowDateCell) {
+        self.datePicker.date = self.workoutTemplate.date;
+    }
     
     self.minutesPicker.tag = 1;
     self.secondsPicker.tag = 2;
@@ -70,6 +69,52 @@
     self.setsStepper.value = self.workoutTemplate.sets;
     self.weightLabel.text = [[NSNumber numberWithLong:self.workoutTemplate.weight] stringValue];
     self.weightStepper.value = self.workoutTemplate.weight;
+    
+    [self showHideCells];
+
+}
+
+- (void)showHideCells
+{
+    
+    [self reloadDataAnimated:NO];
+    
+    self.hideSectionsWithHiddenRows = YES;
+    
+    [self cell:self.dateCell setHidden:!shouldShowDateCell];
+    
+    NSString *selectedType = [WORKOUT_TYPES objectAtIndex:self.typeSegmentedControl.selectedSegmentIndex];
+    
+    if ([selectedType isEqualToString:WORKOUT_TYPE_CARDIO]) {
+        
+        BOOL hidden = YES;
+        
+        [self cell:self.timeCell setHidden:!hidden];
+        
+        [self cell:self.repsCell setHidden:hidden];
+        [self cell:self.setsCell setHidden:hidden];
+        [self cell:self.weightCell setHidden:hidden];
+        
+    } else if ([selectedType isEqualToString:WORKOUT_TYPE_WEIGHT]) {
+        
+        BOOL hidden = NO;
+        
+        [self cell:self.timeCell setHidden:!hidden];
+        
+        [self cell:self.repsCell setHidden:hidden];
+        [self cell:self.setsCell setHidden:hidden];
+        [self cell:self.weightCell setHidden:hidden];
+        
+    } else {
+        [self cell:self.timeCell setHidden:NO];
+        
+        [self cell:self.repsCell setHidden:NO];
+        [self cell:self.setsCell setHidden:NO];
+        [self cell:self.weightCell setHidden:NO];
+    }
+    
+    [self reloadDataAnimated:YES];
+    
 }
 
 - (void)viewDidLoad
@@ -120,6 +165,7 @@
 }
 
 - (IBAction)typeSegmentedControlChanged:(UISegmentedControl *)sender {
+    [self showHideCells];
 }
 
 

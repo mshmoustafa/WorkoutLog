@@ -35,6 +35,12 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *dateCell;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
+@property (weak, nonatomic) IBOutlet UITableViewCell *repsCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *setsCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *weightCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *timeCell;
+
+
 @property (nonatomic) NSUInteger selectedMinutes;
 @property (nonatomic) NSUInteger selectedSeconds;
 

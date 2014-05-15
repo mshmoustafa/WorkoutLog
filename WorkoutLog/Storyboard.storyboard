@@ -769,12 +769,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="minutesPicker" destination="bwg-wg-zjH" id="xsE-Su-iBp"/>
                         <outlet property="nameLabel" destination="Oeu-60-hoN" id="fFq-HS-bmD"/>
                         <outlet property="planLabel" destination="2IN-Vo-Vkd" id="jYc-WJ-Bbq"/>
+                        <outlet property="repsCell" destination="qdn-fv-7tS" id="Nx9-3V-Cf1"/>
                         <outlet property="repsLabel" destination="l4N-Yv-CHw" id="DwB-Lk-SCX"/>
                         <outlet property="repsStepper" destination="xX8-v3-hrU" id="2YZ-La-JEG"/>
                         <outlet property="secondsPicker" destination="ur9-mk-Agz" id="RBF-SG-ifH"/>
+                        <outlet property="setsCell" destination="qHL-Ra-4b6" id="7xo-z0-lmQ"/>
                         <outlet property="setsLabel" destination="MMh-2y-69n" id="71x-xg-QeW"/>
                         <outlet property="setsStepper" destination="fHk-35-ZRE" id="YtC-4B-pU4"/>
+                        <outlet property="timeCell" destination="PZo-Zg-7Vt" id="tYd-Nw-Bey"/>
                         <outlet property="typeSegmentedControl" destination="JtX-Hb-vsg" id="foZ-2G-kGa"/>
+                        <outlet property="weightCell" destination="wIW-Te-MOa" id="Ht1-br-M3X"/>
                         <outlet property="weightLabel" destination="TXp-AQ-2kd" id="Jc0-oW-2ps"/>
                         <outlet property="weightStepper" destination="EaO-pf-cqI" id="hug-eh-SQo"/>
                     </connections>
