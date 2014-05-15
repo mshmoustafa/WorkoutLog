@@ -80,7 +80,7 @@
 {
     [super viewDidLoad];
     
-    
+    self.navigationItem.title = self.workoutEntry.name;
 }
 
 - (void)viewWillAppear:(BOOL)animated
