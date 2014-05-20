@@ -59,7 +59,7 @@
     
     [self reloadDataAnimated:NO];
     
-    self.navBar.title = [_workoutEntry name];
+    self.navigationItem.title = [_workoutEntry name];
     self.typeLabel.text = self.workoutEntry.type;
     self.planName.text = self.workoutEntry.plan;
 #warning *aesthetic: don't show fields that aren't set

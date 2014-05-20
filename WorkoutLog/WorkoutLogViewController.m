@@ -44,9 +44,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!self.workoutLogEntries) {
-        self.workoutLogEntries = [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
-    }
+
     self.workoutLogEntries = [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
     [self.tableView reloadData];
 }
@@ -191,9 +189,14 @@
     if (!self.workoutLogEntries) {
         self.workoutLogEntries = [[NSMutableArray alloc] init];
     }
+    
+    [[WorkoutLogStore sharedStore] addWorkoutEntry:[WorkoutEntry createNewWorkout]];
+    
+    self.workoutLogEntries = [[WorkoutLogStore sharedStore] allWorkoutEntriesByDate];
+    
 //    [self.workoutLogEntries addObject:[NSDate date]];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Stop" message:@"Don't do that.😳" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
-    [alert show];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Stop" message:@"Don't do that.😳" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+//    [alert show];
     [self.tableView reloadData];
 }
 
