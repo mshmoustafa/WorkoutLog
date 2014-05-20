@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Muhammad-Sharif Moustafa. All rights reserved.
 //
 
+#import "WorkoutLogStore.h"
 #import "WorkoutPlanViewController.h"
 #import "WorkoutDetailViewController.h"
 #import "WorkoutPlanEditViewController.h"
@@ -63,6 +64,7 @@
     [super viewDidAppear:animated];
     
     [self.tableView reloadData];
+    self.navBar.title = self.workoutPlan.description;
     [self fillDaysLabel];
 }
 
@@ -197,13 +199,16 @@
 
 - (IBAction)addWorkout:(id)sender {
 #warning This should use a generator in the template class so it can get a unique number as a name.
-    WorkoutEntryTemplate *newWorkoutEntryTemplate = [[WorkoutEntryTemplate alloc] init];
-    newWorkoutEntryTemplate.name = @"Hello";
+    WorkoutEntryTemplate *newWorkoutEntryTemplate = [WorkoutEntryTemplate createNewWorkoutEntryTemplateWithPlan:self.workoutPlan.name];
+//    newWorkoutEntryTemplate.name = @"Hello";
     
     //    WorkoutEntryTemplate *newWorkoutEntryTemplate = [WorkoutEntryTemplate createNewWorkoutEntryTemplate];
     
-    [self.workoutPlan.workoutEntryTemplates addObject:newWorkoutEntryTemplate];
+    [[WorkoutLogStore sharedStore] addWorkoutEntryTemplate:newWorkoutEntryTemplate toPlan:self.workoutPlan];
+    
+//    [self.workoutPlan.workoutEntryTemplates addObject:newWorkoutEntryTemplate];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.workoutPlan.workoutEntryTemplates.count - 1 inSection:0];
+    
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 @end

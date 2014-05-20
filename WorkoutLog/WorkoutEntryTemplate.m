@@ -92,16 +92,19 @@
     entry.min = self.min;
     entry.sec = self.sec;
     entry.plan = [self.plan mutableCopy];
+    
+    entry.workoutEntryTemplateUID = [self.UID copy];
     return entry;
 }
 
-+ (WorkoutEntryTemplate *)createNewWorkoutEntryTemplate
++ (WorkoutEntryTemplate *)createNewWorkoutEntryTemplateWithPlan:(NSString *)planName
 {
     static int workoutEntryTemplateCount = 0;
     
     WorkoutEntryTemplate *newWorkoutTemplate = [[WorkoutEntryTemplate alloc] init];
     
     newWorkoutTemplate.name = [NSString stringWithFormat:@"%@ %d", @"New Workout Template", workoutEntryTemplateCount++];
+    newWorkoutTemplate.plan = planName;
     return newWorkoutTemplate;
 }
 

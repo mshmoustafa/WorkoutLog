@@ -260,12 +260,16 @@
     WorkoutEntry *workoutEntry = [workoutEntryTemplate makeWorkoutEntryFromTemplate];
     
     [self addWorkoutEntry:workoutEntry];
+    
+    [self saveData];
 }
 
 - (void)addWorkoutEntry:(WorkoutEntry *)workoutEntry
 {
     if (![self workoutEntryExists:workoutEntry]) {
         [workoutEntries addObject:workoutEntry];
+        
+        [self saveData];
     }
 }
 
@@ -275,14 +279,19 @@
 //    [workoutEntries addObject:workoutEntry];
 //}
 
-- (void)addWorkoutEntryTemplate:(WorkoutEntryTemplate *)workoutEntryTemplate
+- (void)addWorkoutEntryTemplate:(WorkoutEntryTemplate *)workoutEntryTemplate toPlan:(WorkoutPlan *)plan
 {
     [workoutEntryTemplates addObject:workoutEntryTemplate];
+    [plan.workoutEntryTemplates addObject:workoutEntryTemplate];
+    
+    [self saveData];
 }
 
 - (void)addWorkoutPlan:(WorkoutPlan *)plan
 {
     [workoutPlans addObject:plan];
+    
+    [self saveData];
 }
 
 #pragma mark - Deleters
@@ -317,6 +326,8 @@
     //delete both
     if (indexInWorkoutEntries != -1) {
         [self.allWorkoutEntries removeObjectAtIndex:indexInWorkoutEntries];
+        
+        [self saveData];
     }
     //    if (foundKey) {
     //        [self.completedWorkoutEntriesToday removeObjectForKey:foundKey];

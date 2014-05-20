@@ -13,6 +13,8 @@
 
 @interface TodayTableViewController ()
 
+@property (strong, nonatomic) NSDate *dateOpened;
+
 @end
 
 @implementation TodayTableViewController
@@ -24,6 +26,21 @@
         
     }
     return self;
+}
+
+- (void)initializeWorkoutEntryTemplates
+{
+    self.dateOpened = [WorkoutLogStore dateMidnight:[NSDate date]];
+    
+    self.workoutEntryTemplatesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntryTemplates];
+    self.workoutEntriesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntries];
+    if (!self.workoutEntryTemplatesToday) {
+        self.workoutEntryTemplatesToday = [[NSMutableArray alloc] init];
+    }
+    if (!self.workoutEntriesToday) {
+        self.workoutEntriesToday = [[NSMutableArray alloc] init];
+    }
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad
@@ -57,15 +74,9 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.workoutEntryTemplatesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntryTemplates];
-    self.workoutEntriesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntries];
-    if (!self.workoutEntryTemplatesToday) {
-        self.workoutEntryTemplatesToday = [[NSMutableArray alloc] init];
-    }
-    if (!self.workoutEntriesToday) {
-        self.workoutEntriesToday = [[NSMutableArray alloc] init];
-    }
-    [self.tableView reloadData];
+    [super viewWillAppear:animated];
+    
+    [self initializeWorkoutEntryTemplates];
 }
 
 - (void)didReceiveMemoryWarning
@@ -151,8 +162,17 @@
 {
 //    NSNumber *key = [NSNumber numberWithLong:indexPath.row];
 //    WorkoutEntry *workout = [self.completedWorkouts valueForKey:[key stringValue]];
-    
+
     WorkoutEntryTemplate *workoutEntryTemplate = [self.workoutEntryTemplatesToday objectAtIndex:indexPath.row];
+    
+    NSLog(self.dateOpened.description);
+    NSLog([WorkoutLogStore dateMidnight:[NSDate date]].description);
+    
+    //if the date that this view was last updated was not today, update it. This is to prevent bugs when this view is opened close to midnight and the next day begins.
+    if (![self.dateOpened isEqualToDate:[WorkoutLogStore dateMidnight:[NSDate date]]]) {
+        [self initializeWorkoutEntryTemplates];
+        return;
+    }
     
     BOOL workoutEntryMatchesTemplate = NO;
     WorkoutEntry *matchedWorkoutEntry = nil;
@@ -193,16 +213,7 @@
 
     }
     
-    [[WorkoutLogStore sharedStore] saveData];
-    
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-    
-    
-    
-    
-    
-    
-    
     
     //    UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
     //    if ([self.selectedRows containsObject:cell]) {

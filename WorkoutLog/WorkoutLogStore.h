@@ -52,7 +52,7 @@
 - (void)addWorkoutEntryFromTemplate:(WorkoutEntryTemplate *)workoutEntryTemplate;
 - (void)addWorkoutEntry:(WorkoutEntry *)workoutEntry;
 //- (void)addCompletedWorkoutEntryToday:(WorkoutEntry *)workoutEntry withKey:(NSString *)key;
-- (void)addWorkoutEntryTemplate:(WorkoutEntryTemplate *)workoutEntryTemplate;
+- (void)addWorkoutEntryTemplate:(WorkoutEntryTemplate *)workoutEntryTemplate toPlan:(WorkoutPlan *)plan;
 - (void)addWorkoutPlan:(WorkoutPlan *)plan;
 
 

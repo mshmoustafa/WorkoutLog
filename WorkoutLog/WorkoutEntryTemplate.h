@@ -11,7 +11,6 @@
 //these are only ints, which can't be put in nsarray
 //typedef enum {MON, TUE, WED, THU, FRI, SAT, SUN} DaysOfWeek;
 //DaysOfWeek dow;
-
 @class WorkoutEntry;
 
 @interface WorkoutEntryTemplate : NSObject <NSCoding>
@@ -32,6 +31,6 @@
 
 - (NSString *)getInfoByType;
 - (WorkoutEntry *)makeWorkoutEntryFromTemplate;
-+ (WorkoutEntryTemplate *)createNewWorkoutEntryTemplate;
++ (WorkoutEntryTemplate *)createNewWorkoutEntryTemplateWithPlan:(NSString *)planName;
 
 @end

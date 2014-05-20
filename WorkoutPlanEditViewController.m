@@ -216,19 +216,23 @@
     
     [[WorkoutLogStore sharedStore] saveData];
     
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)addWorkout:(id)sender {
 #warning This should use a generator in the template class so it can get a unique number as a name.
+
     WorkoutEntryTemplate *newWorkoutEntryTemplate = [[WorkoutEntryTemplate alloc] init];
-    newWorkoutEntryTemplate.name = @"Hello";
+    newWorkoutEntryTemplate.name = @"Workout";
+    
+    [[WorkoutLogStore sharedStore] addWorkoutEntryTemplate:newWorkoutEntryTemplate toPlan:self.workoutPlan];
     
     //    WorkoutEntryTemplate *newWorkoutEntryTemplate = [WorkoutEntryTemplate createNewWorkoutEntryTemplate];
     
-    [self.workoutPlan.workoutEntryTemplates addObject:newWorkoutEntryTemplate];
+//    [self.workoutPlan.workoutEntryTemplates addObject:newWorkoutEntryTemplate];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.workoutPlan.workoutEntryTemplates.count - 1 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView reloadData];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

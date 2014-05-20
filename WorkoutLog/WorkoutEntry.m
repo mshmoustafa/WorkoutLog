@@ -36,6 +36,8 @@
         self.weight = [decoder decodeIntegerForKey:@"weight"];
         self.min = [decoder decodeIntegerForKey:@"min"];
         self.sec = [decoder decodeIntegerForKey:@"sec"];
+        
+        self.workoutEntryTemplateUID = [decoder decodeObjectForKey:@"workoutEntryTemplateUID"];
     }
     return self;
 }
@@ -51,6 +53,8 @@
     [encoder encodeInteger:self.weight forKey:@"weight"];
     [encoder encodeInteger:self.min forKey:@"min"];
     [encoder encodeInteger:self.sec forKey:@"sec"];
+    
+    [encoder encodeInteger:self.workoutEntryTemplateUID forKey:@"workoutEntryTemplateUID"];
 }
 
 - (id)init
@@ -68,6 +72,8 @@
     [self setWeight:0];
     [self setMin:0];
     [self setSec:0];
+    
+    [self setWorkoutEntryTemplateUID:nil];
     
     return self;
 }
@@ -177,6 +183,8 @@
     } else if (!self.sets != workoutEntry.sets) {
         return NO;
     } else if (!self.weight != workoutEntry.weight) {
+        return NO;
+    } else if (![self.workoutEntryTemplateUID isEqualToNumber:workoutEntry.workoutEntryTemplateUID]) {
         return NO;
     }
     return YES;

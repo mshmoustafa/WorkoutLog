@@ -191,7 +191,9 @@
     if (!self.workoutLogEntries) {
         self.workoutLogEntries = [[NSMutableArray alloc] init];
     }
-    [self.workoutLogEntries addObject:[NSDate date]];
+//    [self.workoutLogEntries addObject:[NSDate date]];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Stop" message:@"Don't do that.😳" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    [alert show];
     [self.tableView reloadData];
 }
 
