@@ -51,8 +51,20 @@
 - (id) init
 {
     self = [super init];
+    if (self) {
+        [self setUID:[NSNumber numberWithInt:arc4random()]];
+        [self setName:@"Workout"];
+        [self setPlan:nil];
+        [self setType:WORKOUT_TYPE_CUSTOM];
+        [self setReps:0];
+        [self setSets:0];
+        [self setWeight:0];
+        [self setMin:0];
+        [self setSec:0];
+        
 #warning days array should never be nil
-    self.days = nil;
+        self.days = nil;
+    }
     return self;
 }
 

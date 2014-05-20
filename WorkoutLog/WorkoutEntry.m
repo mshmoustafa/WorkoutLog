@@ -62,18 +62,19 @@
     self = [super init];
     
     //set defaults if no params are given
-    
-    [self setUID:[NSNumber numberWithInt:arc4random()]];
-    [self setName:@"Workout"];
-    [self setDate:[WorkoutLogStore dateMidnight:[NSDate date]]];
-    [self setType:WORKOUT_TYPE_CUSTOM];
-    [self setReps:0];
-    [self setSets:0];
-    [self setWeight:0];
-    [self setMin:0];
-    [self setSec:0];
-    
-    [self setWorkoutEntryTemplateUID:nil];
+    if (self) {
+        [self setUID:[NSNumber numberWithInt:arc4random()]];
+        [self setName:@"Workout"];
+        [self setDate:[WorkoutLogStore dateMidnight:[NSDate date]]];
+        [self setType:WORKOUT_TYPE_CUSTOM];
+        [self setReps:0];
+        [self setSets:0];
+        [self setWeight:0];
+        [self setMin:0];
+        [self setSec:0];
+        
+        [self setWorkoutEntryTemplateUID:nil];
+    }
     
     return self;
 }
