@@ -113,15 +113,15 @@
     NSMutableAttributedString *nameLabelText = [[NSMutableAttributedString alloc] initWithString:workoutEntryTemplate.name];
     NSMutableAttributedString *detailText = [[NSMutableAttributedString alloc] initWithString:[workoutEntryTemplate getInfoByType]];
     
-    BOOL workoutEntryMatchesTemplate = NO;
-    for (WorkoutEntry *workoutEntry in self.workoutEntriesToday) {
-        if ([workoutEntry.name isEqualToString:workoutEntryTemplate.name]) {
-            workoutEntryMatchesTemplate = YES;
-            break;
-        }
-    }
+//    BOOL workoutEntryMatchesTemplate = NO;
+//    for (WorkoutEntry *workoutEntry in self.workoutEntriesToday) {
+//        if ([workoutEntry.name isEqualToString:workoutEntryTemplate.name]) {
+//            workoutEntryMatchesTemplate = YES;
+//            break;
+//        }
+//    }
     
-    if (workoutEntryMatchesTemplate) {
+    if ([self workoutEntryMatchesTemplate:workoutEntryTemplate]) {
         
         cell.isCompleted = YES;
         
@@ -162,8 +162,6 @@
 {
 //    NSNumber *key = [NSNumber numberWithLong:indexPath.row];
 //    WorkoutEntry *workout = [self.completedWorkouts valueForKey:[key stringValue]];
-
-    WorkoutEntryTemplate *workoutEntryTemplate = [self.workoutEntryTemplatesToday objectAtIndex:indexPath.row];
     
     NSLog(self.dateOpened.description);
     NSLog([WorkoutLogStore dateMidnight:[NSDate date]].description);
@@ -173,26 +171,28 @@
         [self initializeWorkoutEntryTemplates];
         return;
     }
+
+    WorkoutEntryTemplate *workoutEntryTemplate = [self.workoutEntryTemplatesToday objectAtIndex:indexPath.row];
     
-    BOOL workoutEntryMatchesTemplate = NO;
+//    BOOL workoutEntryMatchesTemplate = NO;
     WorkoutEntry *matchedWorkoutEntry = nil;
-    for (WorkoutEntry *workoutEntry in self.workoutEntriesToday) {
-        if ([workoutEntry.name isEqualToString:workoutEntryTemplate.name]) {
-            workoutEntryMatchesTemplate = YES;
-            matchedWorkoutEntry = workoutEntry;
-            break;
-        }
-    }
+//    for (WorkoutEntry *workoutEntry in self.workoutEntriesToday) {
+//        if ([workoutEntry.name isEqualToString:workoutEntryTemplate.name]) {
+//            workoutEntryMatchesTemplate = YES;
+//            matchedWorkoutEntry = workoutEntry;
+//            break;
+//        }
+//    }
     
     //if workout entry template is found, delete it from completed workouts
-    if (workoutEntryMatchesTemplate) {
+    if ((matchedWorkoutEntry = [self workoutEntryMatchesTemplate:workoutEntryTemplate])) {
 //        [self.completedWorkouts removeObjectForKey:[key stringValue]];
         
         WorkoutLogStore *store = [WorkoutLogStore sharedStore];
         
         [[WorkoutLogStore sharedStore] deleteWorkoutEntry:matchedWorkoutEntry];
         
-        self.workoutEntriesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntries];
+//        self.workoutEntriesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntries];
         
     } else {
         
@@ -207,11 +207,13 @@
         
             [[WorkoutLogStore sharedStore] addWorkoutEntry:workout];
         
-        self.workoutEntriesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntries];
-            
+//        self.workoutEntriesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntries];
+        
 //        }
 
     }
+    
+    self.workoutEntriesToday = [[WorkoutLogStore sharedStore] todayWorkoutEntries];
     
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
@@ -278,7 +280,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     UIButton *editButton = (UIButton *)sender;
-    NSLog(@"Edit button clicked on row: %d", editButton.tag);
+    NSLog(@"Edit button clicked on row: %ld", (long)editButton.tag);
     
     WorkoutEditViewController *vc = segue.destinationViewController;
     vc.workoutTemplate = [self.workoutEntryTemplatesToday objectAtIndex:editButton.tag];
@@ -296,6 +298,16 @@
 //        }
 //    }
 //}
+
+- (WorkoutEntry *)workoutEntryMatchesTemplate:(WorkoutEntryTemplate *)workoutEntryTemplate
+{
+    for (WorkoutEntry *workoutEntry in self.workoutEntriesToday) {
+        if ([workoutEntry.name isEqualToString:workoutEntryTemplate.name]) {
+            return workoutEntry;
+        }
+    }
+    return nil;
+}
 
 - (IBAction)editWorkout:(id)sender {
 }
