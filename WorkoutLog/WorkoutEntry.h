@@ -16,7 +16,7 @@
 
 @interface WorkoutEntry : WorkoutEntryTemplate <NSCoding>
 
-@property (strong, nonatomic) NSNumber *workoutEntryTemplateUID;
+@property (strong, nonatomic) NSString *workoutEntryTemplateUID;
 
 + (WorkoutEntry *)createNewWorkout;
 

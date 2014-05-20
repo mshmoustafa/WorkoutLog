@@ -301,14 +301,14 @@
     [self deleteWorkoutEntryByUID:workoutEntry.UID andDate:workoutEntry.date];
 }
 
-- (void)deleteWorkoutEntryByUID:(NSNumber *)UID andDate:(NSDate *)date
+- (void)deleteWorkoutEntryByUID:(NSString *)UID andDate:(NSDate *)date
 {
     
     //find the workout in allWorkoutEntries
     long indexInWorkoutEntries = -1;
     //    NSString *foundKey = nil;
     for (WorkoutEntry *workout in self.allWorkoutEntries) {
-        if ([UID isEqualToNumber:workout.UID] && [date isEqualToDate:workout.date]) {
+        if ([UID isEqualToString:workout.UID] && [date isEqualToDate:workout.date]) {
             indexInWorkoutEntries = [self.allWorkoutEntries indexOfObject:workout];
             break;
         }
@@ -342,7 +342,7 @@
 //    return;
 //}
 
-- (void)deleteWorkoutEntryTemplateByUID:(NSNumber *)UID
+- (void)deleteWorkoutEntryTemplateByUID:(NSString *)UID
 {
     
 }
@@ -369,7 +369,7 @@
 - (BOOL)workoutEntryExists:(WorkoutEntry *)workoutEntry
 {
     for (WorkoutEntry *existingWorkoutEntry in workoutEntries) {
-        if ([workoutEntry.UID isEqualToNumber:existingWorkoutEntry.UID] && [workoutEntry.date isEqualToDate:existingWorkoutEntry.date]) {
+        if ([workoutEntry.UID isEqualToString:existingWorkoutEntry.UID] && [workoutEntry.date isEqualToDate:existingWorkoutEntry.date]) {
             return YES;
         }
     }

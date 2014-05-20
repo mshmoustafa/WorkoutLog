@@ -8,7 +8,7 @@
 
 #import "WorkoutEntry.h"
 #import "WorkoutLogStore.h"
-#import "RandomString.h"
+#import "UIDGenerator.h"
 
 @implementation WorkoutEntry
 
@@ -54,7 +54,7 @@
     [encoder encodeInteger:self.min forKey:@"min"];
     [encoder encodeInteger:self.sec forKey:@"sec"];
     
-    [encoder encodeInteger:self.workoutEntryTemplateUID forKey:@"workoutEntryTemplateUID"];
+    [encoder encodeObject:self.workoutEntryTemplateUID forKey:@"workoutEntryTemplateUID"];
 }
 
 - (id)init
@@ -63,7 +63,7 @@
     
     //set defaults if no params are given
     if (self) {
-        [self setUID:[NSNumber numberWithInt:arc4random()]];
+        [self setUID:[UIDGenerator generateUID]];
         [self setName:@"Workout"];
         [self setDate:[WorkoutLogStore dateMidnight:[NSDate date]]];
         [self setType:WORKOUT_TYPE_CUSTOM];
@@ -171,7 +171,7 @@
 {
     if (![self.date isEqualToDate:workoutEntry.date]) {
         return NO;
-    } else if ([self.UID isEqualToNumber:workoutEntry.UID]) {
+    } else if ([self.UID isEqualToString:workoutEntry.UID]) {
         return NO;
     } else if (![self.name isEqualToString:workoutEntry.name]) {
         return NO;
@@ -185,7 +185,7 @@
         return NO;
     } else if (!self.weight != workoutEntry.weight) {
         return NO;
-    } else if (![self.workoutEntryTemplateUID isEqualToNumber:workoutEntry.workoutEntryTemplateUID]) {
+    } else if (![self.workoutEntryTemplateUID isEqualToString:workoutEntry.workoutEntryTemplateUID]) {
         return NO;
     }
     return YES;

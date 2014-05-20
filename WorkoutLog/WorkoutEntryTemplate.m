@@ -8,6 +8,7 @@
 
 #import "WorkoutEntry.h"
 #import "WorkoutEntryTemplate.h"
+#import "UIDGenerator.h"
 
 @implementation WorkoutEntryTemplate
 
@@ -52,7 +53,7 @@
 {
     self = [super init];
     if (self) {
-        [self setUID:[NSNumber numberWithInt:arc4random()]];
+        [self setUID:[UIDGenerator generateUID]];
         [self setName:@"Workout"];
         [self setPlan:nil];
         [self setType:WORKOUT_TYPE_CUSTOM];

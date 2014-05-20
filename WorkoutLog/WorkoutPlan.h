@@ -10,7 +10,7 @@
 
 @interface WorkoutPlan : NSObject <NSCoding>
 
-@property (strong, nonatomic) NSNumber *UID;
+@property (strong, nonatomic) NSString *UID;
 //name of the plan
 @property (strong, nonatomic) NSString *name;
 //days the workouts in the plan should be done

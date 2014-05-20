@@ -8,6 +8,7 @@
 
 #import "WorkoutPlan.h"
 #import "WorkoutEntryTemplate.h"
+#import "UIDGenerator.h"
 
 @implementation WorkoutPlan
 
@@ -36,7 +37,7 @@
 {
     self = [super init];
     if (self) {
-        self.UID = [NSNumber numberWithInt:arc4random()];
+        self.UID = [UIDGenerator generateUID];
         self.name = nil;
         self.days = [[NSMutableOrderedSet alloc] init];
         self.workoutEntryTemplates = [[NSMutableArray alloc] init];

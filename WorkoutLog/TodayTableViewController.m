@@ -302,7 +302,7 @@
 - (WorkoutEntry *)workoutEntryMatchesTemplate:(WorkoutEntryTemplate *)workoutEntryTemplate
 {
     for (WorkoutEntry *workoutEntry in self.workoutEntriesToday) {
-        if ([workoutEntry.name isEqualToString:workoutEntryTemplate.name] && [workoutEntry.workoutEntryTemplateUID isEqualToNumber:workoutEntryTemplate.UID]) {
+        if ([workoutEntry.name isEqualToString:workoutEntryTemplate.name] && [workoutEntry.workoutEntryTemplateUID isEqualToString:workoutEntryTemplate.UID]) {
             return workoutEntry;
         }
     }

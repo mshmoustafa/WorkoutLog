@@ -15,7 +15,7 @@
 
 @interface WorkoutEntryTemplate : NSObject <NSCoding>
 
-@property (strong, nonatomic) NSNumber *UID;
+@property (strong, nonatomic) NSString *UID;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) NSString *plan;

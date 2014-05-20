@@ -58,7 +58,7 @@
 
 #pragma mark - Deleters
 
-- (void)deleteWorkoutEntryByUID:(NSNumber *)UID andDate:(NSDate *)date;
+- (void)deleteWorkoutEntryByUID:(NSString *)UID andDate:(NSDate *)date;
 - (void)deleteWorkoutEntry:(WorkoutEntry *)workoutEntry;
 //- (void)deleteCompletedWorkoutEntryTodayByUID:(NSNumber *)UID;
 
